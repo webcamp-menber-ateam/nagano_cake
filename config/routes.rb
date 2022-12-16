@@ -7,10 +7,39 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  namespace :public do
+    root to: 'homes#top'
+    get "/about"=>"homes#about"
+    resources :products, only: [:index, :show]
+    resource :customers, only: [:edit, :show, :update] do
+      get "unsubscribe"=>"customers#unsubscribe"
+      patch "withdrawal"=>"customers#withdrawal"
+    end
+    resources :carts, only: [:index, :update, :create, :destroy]
+    delete "carts/destroy_all"=>"carts#destroy_all"
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post "confirm"=>"orders#confirm"
+        get "complete"=>"orders#complete"
+      end
+    end
+    resources :addresses, except: [:new, :show]
+  end
+
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
+
+
+  namespace :admin do
+    root to: 'homes#top'
+    resources :products, except: [:destroy]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :orders, only: [:show, :update]
+    resources :order_details, only: [:update]
+  end
 
 end
