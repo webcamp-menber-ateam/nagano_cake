@@ -18,7 +18,7 @@
           <%= f.label :'(セイ)', class: 'col-1' %>
           <%= f.text_field :last_name_kana, autofocus: true, placeholder: 'レイワ' %>
           <%= f.label :'(メイ)', class: 'col-1' %>
-          <%= f.text_field :first_name_kana, autofocus: true, placeholder: 'ミチコ' %>
+          <%= f.email_field :first_name_kana, autofocus: true, placeholder: 'ミチコ' %>
         </div>
 
         <div class="field row mt-2">
@@ -51,7 +51,7 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
 
-        <div class="actions row mt-3">
+        <div class="actions col-8 mt-3r row">
           <div class="col-4"></div>
           <%= f.submit "新規登録",class: "btn btn-sm btn-success px-5" %>
         </div>
@@ -60,7 +60,7 @@
 
     <div class="col-12">
       <h5 class="col-4 px-4 mt-4">既に登録済みの方</h5>
-      <div class="ml-5">
+      <div class="col-8 ml-5">
         <%= render "public/shared/links" %>
         <span>　からログインしてください。</span>
       </div>
