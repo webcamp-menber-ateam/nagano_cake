@@ -1,3 +1,6 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-6">
@@ -9,6 +12,28 @@
         <%= f.text_field :name, :placeholder => "ジャンル名", class: 'mr-5' %>
         <%= f.submit "新規登録", class: 'btn btn-success' %>
       <% end %>
+    </div>
+  </div>
+</div>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-5">
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th class="text-center">ジャンル</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td class="align-middle"><%= genre.name %></td>
+              <td class="text-center"><%= link_to "編集する", edit_admin_genre_path(genre.id), class:'btn btn-success mx-auto' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
