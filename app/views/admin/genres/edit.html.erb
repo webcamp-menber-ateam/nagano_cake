@@ -1,1 +1,14 @@
-<h1>test</h1>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-6">
+      <div class="px-5 pt-5">
+        <h4>ジャンル編集</h4>
+      </div>
+      <%= form_with model: [:admin, @genre] do |f| %>
+        <%= f.label :"ジャンル名", class: 'mr-5 mt-5'%>
+        <%= f.text_field :name, :placeholder => "ジャンル名", class: 'mr-5' %>
+        <%= f.submit "変更を保存", class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+</div>
