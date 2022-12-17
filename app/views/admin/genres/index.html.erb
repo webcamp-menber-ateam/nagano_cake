@@ -1,4 +1,5 @@
 <div class="container px-5 px-sm-0">
+  <%= render 'layouts/errors', obj: @genre %>
   <%= flash[:notice] %>
   <div class="row">
     <div class="col-6">
@@ -27,6 +28,7 @@
           <% @genres.each do |genre| %>
             <tr>
               <td class="align-middle"><%= genre.name %></td>
+              <td class="text-right"><%= link_to "編集する", edit_admin_genre_path(genre.id), class:'btn btn-success' %></td>
             </tr>
           <% end %>
         </tbody>
