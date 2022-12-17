@@ -6,9 +6,14 @@ class Admin::GenresController < ApplicationController
   end
 
   def create
-    genre = Genre.new(genre_params)
-    genre.save
-    redirect_to request.referer, notice: "ジャンルを追加しました。"
+    @genre = Genre.new(genre_params)
+    if @genre.save
+      redirect_to request.referer, notice: "ジャンルを追加しました。"
+    else
+      @genres = Genre.all
+      render 'index'
+    end
+
   end
 
   def edit
