@@ -10,6 +10,7 @@ class Admin::ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @genre = Genre.all
   end
 
   def create
