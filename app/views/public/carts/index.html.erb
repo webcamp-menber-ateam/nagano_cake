@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <div class="d-flex justify-content-between">
-        <h6>ショッピングカート</h6>
-        <h6><%= link_to "カートを空にする", carts_destroy_all_path, method: :delete, class:"btn btn-danger" %></h6>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <h6 class="p-1  bg-secondary text-white ">ショッピングカート</h6>
+        <h6><%= link_to "カートを空にする", destroy_all_carts_path, method: :delete, class:"btn btn-sm btn-danger" %></h6>
       </div>
       <table class="table table-borderless">
         <thead class="thead-light">
@@ -11,25 +11,25 @@
             <th class="border border-dark">商品名</th>
             <th class="border border-dark" style= "width: 160px">単価(税込)</th>
             <th class="border border-dark" style= "width: 200px">数量</th>
-            <th class="border border-dark">小計</th>
+            <th class="border border-dark" style= "width: 160px">小計</th>
             <th class="border border-dark" style= "width: 200px"></th>
           </tr>
         </thead>
-        <!--< %= @carts.each do |cart| %>-->
+        <% @carts.each do |cart| %>
         <tbody>
           <tr>
-            <td class="align-middle border border-dark"><%= @carts.customer_id %></td> <!--本当はcart.products.name-->
-            <td class="align-middle border border-dark"><%= @carts.with_tax_price.to_s(:delimited) %></td> <!--本当はcart.products.with〜-->
-            <%= form_with url: cart_path(@carts.id), method: :patch do |f| %> <!--本当はcart.id〜-->
-            <td class="align-middle border border-dark text-center"><%= f.select :amount, *[1..99], selected: @carts.amount, class: "form-control" %>
+            <td class="align-middle border border-dark"><%= cart.product.name %></td> <!--画像は→< %= image_tag cart.products.get_material_image(50,50)%>-->
+            <td class="align-middle border border-dark"><%= (cart.product.with_tax_price).to_s(:delimited) %></td>
+            <%= form_with model: cart, url: cart_path(cart.id), method: :patch do |f| %>
+            <td class="align-middle border border-dark text-center"><%= f.select :amount, *[1..99], selected: cart.amount, class: "form-control" %>
             <%= f.submit "変更", class: "ml-2 btn btn-success"%></td>
             <% end %>
-            <td class="align-middle border border-dark"><%= @carts.subtoal.to_s(:delimited) %></td>
-            <td class="align-middle border border-dark"><%= link_to "削除する", cart_path(@carts.id), class:"btn btn-danger" %></td>
-            <% @total_price += @carts.subtoal %>
+            <td class="align-middle border border-dark"><%= (cart.subtoal).to_s(:delimited) %></td>
+            <td class="align-middle border border-dark"><%= link_to "削除する", cart_path(cart.id), method: :delete, class:"btn btn-danger" %></td>
+            <% @total_price += cart.subtoal %>
           </tr>
         </tbody>
-        <!--< % end %>-->
+        <% end %>
         <tbody>
           <tr>
             <td class="align-middle" colspan="3"><%= link_to "買い物を続ける", products_path, class:"btn btn-primary" %></td>
@@ -42,6 +42,14 @@
   </div>
   <div class="text-center"><%= link_to "情報入力に進む", new_order_path, class: "ml-4 btn btn-success"%></div>
 
+  <!--以下商品登録ページ　あとで消します-->
+  <div class="form-group">
+    <h5>カート登録用フォーム(仮)</h5>
+    <%= form_with model: Cart.new, url: carts_path, method: :post do |f| %>
+      <%= f.hidden_field :customer_id, :value => current_customer.id%>
+      <%= f.collection_select(:product_id, Product.all, :id, :name) %>
+      <%= f.number_field :amount, min: 0%>
+      <%= f.submit "カートに入れる" %>
+    <% end %>
+  </div>
 </div>
-
-<!--360 幅での表示-->
