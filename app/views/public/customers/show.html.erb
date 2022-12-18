@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h5>マイページ</h5>
+
+      <h5>登録情報</h5>
+      <table class="table table-bordered border-2">
+        <tr>
+          <th>氏名</th> <th><%= current_customer.last_name %></th>
+        </tr>
+        <tr>
+          <th>カナ</th> <td><%= current_customer.last_name_kana %></td>
+        </tr>
+        <tr>
+          <th>郵便番号</th> <td><%= current_customer.postcode %></td>
+        </tr>
+        <tr>
+          <th>住所</th> <td><%= current_customer.address %></td>
+        </tr>
+        <tr>
+          <th>電話番号</th> <td><%= current_customer.phone_number %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th> <td><%= current_customer.email %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
