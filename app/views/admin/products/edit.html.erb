@@ -1,0 +1,46 @@
+<div class="container px-5 mx-auto">
+  <%= render 'layouts/errors', obj: @product %>
+  <%= flash[:notice] %>
+
+  <div class="row">
+    <div class="col-sm-12 px-5">
+      <div class="px-5 text-center">
+        <h4>商品編集</h4>
+      </div>
+      <%= form_with model: @product, url: admin_product_path(@product), local: true do |f| %>
+          <%= f.label :商品画像, class: 'col-md-3'%>
+          <%= f.file_field :image, accept: "image/*" %>
+
+      <div class="form-group">
+        <%= f.label :商品名, class: 'col-md-3'%>
+        <%= f.text_field :name, :placeholder => "商品名", class: 'col-md-5' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :商品説明, class: 'col-md-3'%>
+        <%= f.text_area :explanation, :placeholder => "ここに説明文を記述します", class: 'col-md-6' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :ジャンル, class: 'col-md-3' %>
+        <%= f.collection_select(:genre_id, Genre.all, :id, :name, include_blank: "--選択してください") %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :税抜価格, class: 'col-md-3' %>
+        <%= f.text_field :price, :placeholder => "1000", class: 'col-md-5' %><spna class="col-md-1">円</span>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :販売ステータス, class: 'col-md-3' %>
+        <%= f.radio_button :is_active, "true" %>販売中
+        <%= f.radio_button :is_active, "false" %>販売停止中
+      </div>
+
+      <div class="form-group">
+      <%= f.submit "変更を保存", class: 'btn btn-success' %>
+      </div>
+      <% end %>
+
+  </div>
+</div>
