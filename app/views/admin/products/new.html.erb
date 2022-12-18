@@ -33,8 +33,8 @@
 
       <div class="form-group">
         <%= f.label :販売ステータス, class: 'col-md-3' %>
-        <%= f.radio_button :is_active, "sale" %>販売中
-        <%= f.radio_button :is_active, "" %>販売停止中
+        <%= f.radio_button :is_active, "true" %>販売中
+        <%= f.radio_button :is_active, "false" %>販売停止中
       </div>
 
       <div class="form-group">
