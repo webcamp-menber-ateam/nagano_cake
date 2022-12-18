@@ -22,6 +22,9 @@
     <%= link_to new_customer_session_path do %>
       <i class="fas fa-sign-in-alt"></i> Log in
     <% end %>
+    <% if customer_signed_in? %>
+      <%= current_customer.last_name %>
+    <% end %>
 
     <%= yield %>
   </body>
