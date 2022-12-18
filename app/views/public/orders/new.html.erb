@@ -1,0 +1,45 @@
+<div class ="container">
+  <div class ="row">
+    <div class="col-12">
+      <h5 class="mx-4 ml-5">注文情報入力</h5>
+      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+      <!--Order.payment_methods_i18n.invert-->
+      <h6 class="my-2 font-weight-bold">支払い方法</h6>
+      <label class="mx-0 ml-4"><%= f.radio_button(:payment_method, 0, checked: "checked") %>
+      <%= Order.payment_methods.key(0) %></label><br>
+      <label class="mx-0 ml-4"><%= f.radio_button(:payment_method, 1) %>
+      <%= Order.payment_methods.key(1) %></label>
+
+      <h6 class="my-2 font-weight-bold">お届け先</h6>
+      <label class="mb-3 ml-4">
+        <%= f.radio_button(:delivary_select, 1, checked: "checked")%>
+        <span>ご自身の住所</span>
+        <div class="ml-4"><%= "〒 " + @customer.postcode + " " +  @customer.address %></div> <!--current_user.postcode -->
+        <div class="ml-4"><%= "　 " + @customer.last_name + @customer.first_name %>様</div>
+      </label><br>
+      
+      <% if @customer.addresses.present? %> 
+        <label class="mb-3 ml-4">
+          <%= f.radio_button(:delivary_select, 2)%>
+          <span>登録済み住所から選択</span>
+          <div class="ml-4"><%= f.collection_select(:delivary_adress, @customer.addresses, :id, :adress, {}, style: "width:500px") %></div>
+        </label><br>
+      <% end %>
+      
+      <label class="ml-4">
+        <%= f.radio_button(:delivary_select, 3)%>
+        <span>新しいお届け先</span>
+        <div class="ml-4 mb-3 col-xs-12">郵便番号(ハイフンなし)<br>
+        <%= f.text_field :delivary_postcode, placeholder: "000000" %></div>
+        <div class="ml-4 mb-3 col-xs-12">住所<br>
+        <%= f.text_field :delivary_adress, size: "40x10", placeholder: "東京都渋谷区代々木神園町0-0" %></div>
+        <div class="ml-4 col-xs-12">氏名<br>
+        <%= f.text_field :delivary_name, placeholder: "令和道子" %></div>
+      </label><br>
+      <div class ="text-center" ><%= f.submit "確認画面に進む", class: "btn btn-primary"%></div>
+      <% end %>
+      
+      </div>
+    </div>
+  </div>
+</div>
