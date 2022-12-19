@@ -7,7 +7,7 @@
         <%= f.label :"郵便番号(ハイフンなし)", class: 'ml-4 mt-4' %>
       </div>
       <div class="col-9">
-        <%= f.text_field :postcode, :placeholder => "0000000", class: 'col-5 mt-4' %>
+        <%= f.text_field :postcode, :placeholder => "0000000", class: 'col-4 mt-4' %>
       </div>
     </div>
 
@@ -16,7 +16,7 @@
         <%= f.label :"住所", class: 'ml-4 mt-1'%>
       </div>
       <div class="col-9">
-        <%= f.text_area :postcode, :placeholder => "東京都",class: 'col-8 mt-1' %>
+        <%= f.text_area :postcode, :placeholder => "東京都渋谷区代々木神園町0-0",class: 'col-8 mt-1' %>
       </div>
     </div>
 
@@ -24,32 +24,36 @@
       <div class="col-3">
         <%= f.label :"宛名", class: 'ml-4 mt-1'%>
       </div>
-      <div class="col-9">
+      <div class="col-7">
         <%= f.text_field :postcode, :placeholder => "0000000",class: 'col-5 mt-1' %>
       </div>
-    </div>
-
-    <div class="form-group text-right col-9">
-      <%= f.submit "新規登録", class: 'btn btn-success' %>
+      <div class="col-2">
+        <%= f.submit "新規登録", class: 'btn btn-success mt-1' %>
+      </div>
     </div>
   <% end %>
 </div>
 
-<div class="table-responsive col-7 px-5 ml-5 mt-4">
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <th>address</th>
-      <th>address</th>
-      <th>address</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-    </tr>
-  </tbody>
+<div class="table-responsive col-7 px-5 ml-5 mt-5">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>宛名</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @addresses.each do |address| %>
+          <td><%= address.postcode %></td>
+          <td><%= address.address %></td>
+          <td><%= address.name %></td>
+          <td>編集</td>
+          <td>削除</td>
+        <% end %>
+    </tbody>
 
-</table>
+  </table>
 </div>
