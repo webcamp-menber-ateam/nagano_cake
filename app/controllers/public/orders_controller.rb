@@ -8,8 +8,9 @@ class Public::OrdersController < ApplicationController
     @orders = current_customer.orders
   end
   
-  def create
-    # ordersessionを作成
+  def confirm
+    binding.pry
+    # ordersessionを作成newで指定しているからいらないかな？
     session[:order] = Order.new()
     # 顧客idの保存
     session[:order][:customer_id] = current_customer.id
@@ -17,40 +18,55 @@ class Public::OrdersController < ApplicationController
     session[:order][:postage] = 800
     # 合計金額の計算
     carts = current_customer.carts #顧客のカートを呼び出し
-    total_price = 0 #合計金額用のメソッドの定義
-    carts.each do |cart| #カートの中身をeachで取り出し
-      total_price += cart.subtoal.to_i
-    end
+    @total = carts.inject(0) { |sum, cart| sum + cart.subtoal } #26400
+    # @product_total_price = 0 #合計金額用のメソッドの定義
+    # carts.each do |cart| #カートの中身をeachで取り出し
+    #   @product_total_price += cart.subtoal.to_i
+    # end
     # 合計金額の保存(上記計算+送料)両方数値なのでto_i不要
-    session[:order][:total_price] = total_price + session[:order][:postage]
+    session[:order][:total_price] = @total + session[:order][:postage]
     # 注文ステータスの保存
     session[:order][:order_status] = 0
     # 支払い方法の保存
-    session[:order][:payment_method] = params[:payment_method].to_i
+    session[:order][:payment_method] = params[:order][:payment_method].to_i
     
     # 配送先処理
-    delivery_destination = params[:delivary_select].to_i
+    delivery_destination = params[:order][:delivary_select].to_i
     if delivery_destination == 1
       session[:order][:delivary_postcode] = current_customer.postcode
       session[:order][:delivary_adress] = current_customer.adress
       session[:order][:delivary_name] = (current_customer.last_name + current_customer.first_name)
     elsif delivery_destination == 2
-      delivary = Address.find(id: params[:delivary_adress])
+      delivary = Address.find(id: params[:order][:delivary_adress])
       session[:order][:delivary_postcode] = delivary.postcode
       session[:order][:delivary_adress] = delivary.address
       session[:order][:delivary_name] = delivary.name
     else #delivery_destination == 3
-      session[:order][:delivary_postcode] = params[:delivary_postcode]
-      session[:order][:delivary_adress] = params[:delivary_adress]
-      session[:order][:delivary_name] = params[:delivary_name]
+      session[:order][:delivary_postcode] = params[:order][:delivary_postcode]
+      session[:order][:delivary_adress] = params[:order][:delivary_adress]
+      session[:order][:delivary_name] = params[:order[:delivary_name]
     end
+    @carts = current_customer.carts
+    redirect_to confirm_orders_path
+  end
+  
+  def complete
     
+  end
+  
+  def create
+    order = Order.new(session[:order])
+    order.save
+    session[:order].clear
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 end
 
+# 日本語表示 order.payment_method_i18n
 
 # 		# お届け先情報に漏れがあればリダイレクト
 # 		if session[:order][:post_code].presence && session[:order][:address].presence && session[:order][:name].presence
@@ -61,9 +77,6 @@ end
 
 
 # 	def complete
-# 		order = Order.new(session[:order])
-# 		order.save
-
 # 		if session[:new_address]
 # 			shipping_address = current_customer.shipping_addresses.new
 # 			shipping_address.postal_code = order.post_code
@@ -87,11 +100,4 @@ end
 
 # 		# 購入後はカート内商品削除
 # 		cart_items.destroy_all
-# 	end
-
-
-
-# 	def show
-# 		@order = Order.find(params[:id])
-# 		@order_details = @order.order_details
 # 	end

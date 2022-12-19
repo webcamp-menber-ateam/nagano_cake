@@ -2,13 +2,13 @@
   <div class ="row">
     <div class="col-12">
       <h5 class="mx-4 ml-5">注文情報入力</h5>
-      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+      <%= form_with model: @order, url: confirm_orders_path, method: :post do |f| %>
       <!--Order.payment_methods_i18n.invert-->
       <h6 class="my-2 font-weight-bold">支払い方法</h6>
       <label class="mx-0 ml-4"><%= f.radio_button(:payment_method, 0, checked: "checked") %>
-      <%= Order.payment_methods.key(0) %></label><br>
+      <%= Order.payment_methods[:credit_card] %></label><br>
       <label class="mx-0 ml-4"><%= f.radio_button(:payment_method, 1) %>
-      <%= Order.payment_methods.key(1) %></label>
+      <%= Order.payment_methods[:transfer] %></label>
 
       <h6 class="my-2 font-weight-bold">お届け先</h6>
       <label class="mb-3 ml-4">
@@ -17,15 +17,15 @@
         <div class="ml-4"><%= "〒 " + @customer.postcode + " " +  @customer.address %></div> <!--current_user.postcode -->
         <div class="ml-4"><%= "　 " + @customer.last_name + @customer.first_name %>様</div>
       </label><br>
-      
-      <% if @customer.addresses.present? %> 
+
+      <% if @customer.addresses.present? %>
         <label class="mb-3 ml-4">
           <%= f.radio_button(:delivary_select, 2)%>
           <span>登録済み住所から選択</span>
           <div class="ml-4"><%= f.collection_select(:delivary_adress, @customer.addresses, :id, :adress, {}, style: "width:500px") %></div>
         </label><br>
       <% end %>
-      
+
       <label class="ml-4">
         <%= f.radio_button(:delivary_select, 3)%>
         <span>新しいお届け先</span>
@@ -38,7 +38,7 @@
       </label><br>
       <div class ="text-center" ><%= f.submit "確認画面に進む", class: "btn btn-primary"%></div>
       <% end %>
-      
+
       </div>
     </div>
   </div>
