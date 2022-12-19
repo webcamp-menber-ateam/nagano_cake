@@ -1,13 +1,13 @@
 <div class ="container">
   <div class="row">
     <div class="col-8">
-      <table class="table">
+      <table class="table table-bordered" style="border-color: black">
         <thead>
-          <tr>
-            <th>商品名</th>
-            <th>単価(税込)</th>
-            <th>数量</th>
-            <th>小計</th>
+          <tr class="table-active">
+            <th class="border border-dark">商品名</th>
+            <th class="border border-dark">単価(税込)</th>
+            <th class="border border-dark">数量</th>
+            <th class="border border-dark">小計</th>
           </tr>
         </thead>
         <% @carts.each do |cart| %>
@@ -15,7 +15,7 @@
           <tr>
             <td class="align-middle border border-dark"><%= cart.product.name %></td>
             <td class="align-middle border border-dark"><%= (cart.product.with_tax_price).to_s(:delimited) %></td>
-            <td class="align-middle border border-dark text-center"><%= cart.amount %></td>
+            <td class="align-middle border border-dark"><%= cart.amount %></td>
             <td class="align-middle border border-dark"><%= (cart.subtoal).to_s(:delimited) %></td>
           </tr>
         </tbody>
@@ -23,11 +23,11 @@
       </table>
       
       <div>
-        <p>支払い方法</p><%= @order[:order]["payment_method"]_i18n %>
+        <p>支払い方法</p><%= @order.payment_method_i18n %>
       </div>
       <div>
-        <p>お届け先</p><%="〒 " + @order[:order]["delivary_postcode"] + @order[:order]["delivary_adress"]%>
-        <p><%= @order[:order]["delivary_name"]%></p>
+        <p>お届け先</p><%="〒 " + @order.delivery_postcode + @order.delivery_address%>
+        <p><%= @order.delivery_name%></p>
       </div>
       
       <%= link_to "注文を確定する", orders_path, method: :post, class: "btn btn-primary"%>
@@ -35,9 +35,18 @@
     
     <div class="col-4">
       <table class="table">
-        <tr><th>送料</th><td><%= @order[:order]["postage"] %></td></tr>
-        <tr><th>商品合計</th><td><%= @total_price %></td></tr>
-        <tr><th>請求金額</th><td><%= @order[:order]["total_price"] %></td></tr>
+        <tr>
+          <th class="border border-dark table-active">送料</th>
+          <td class="border border-dark"><%= (@order.postage).to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th class="border border-dark table-active">商品合計</th>
+          <td class="border border-dark"><%= @total.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th class="border border-dark table-active">請求金額</th>
+          <td class="border border-dark"><%= (@order.total_price).to_s(:delimited) %></td>
+        </tr>
       </table>
     </div>
   </div>
