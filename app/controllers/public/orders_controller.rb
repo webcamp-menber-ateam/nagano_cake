@@ -9,7 +9,7 @@ class Public::OrdersController < ApplicationController
   end
   
   def confirm
-    # ordersessionを作成newで指定しているからいらないかな？
+    # ordersessionを作成
     session[:order] = Order.new(order_params)
     # 顧客idの保存
     session[:order][:customer_id] = current_customer.id
@@ -18,17 +18,13 @@ class Public::OrdersController < ApplicationController
     # 合計金額の計算
     carts = current_customer.carts #顧客のカートを呼び出し
     @total = carts.inject(0) { |sum, cart| sum + cart.subtoal }
-    # @product_total_price = 0 #合計金額用のメソッドの定義
-    # carts.each do |cart| #カートの中身をeachで取り出し
-    #   @product_total_price += cart.subtoal.to_i
-    # end
     # 合計金額の保存(上記計算+送料)両方数値なのでto_i不要
     session[:order][:total_price] = @total + session[:order][:postage]
     # 注文ステータスの保存
     session[:order][:order_status] = 0
     # 支払い方法の保存
     session[:order][:payment_method] = params[:order][:payment_method]
-    # binding.pry
+
     # 配送先処理
     delivery_destination = params[:order][:delivery_select].to_i
     if delivery_destination == 1
@@ -53,11 +49,11 @@ class Public::OrdersController < ApplicationController
     
   end
   
-  # def create
-  #   order = Order.new(session[:order])
-  #   order.save
-  #   session[:order].clear
-  # end
+  def create
+    order = Order.new(session[:order])
+    order.save
+    session[:order].clear
+  end
 
   # def show
   #   @order = Order.find(params[:id])

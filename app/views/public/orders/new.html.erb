@@ -15,7 +15,7 @@
         <%= f.radio_button(:delivery_select, 1, checked: "checked")%>
         <span>ご自身の住所</span>
         <div class="ml-4"><%= "〒 " + @customer.postcode + " " +  @customer.address %></div> <!--current_user.postcode -->
-        <div class="ml-4"><%= "　 " + @customer.last_name + @customer.first_name %>様</div>
+        <div class="ml-4"><%= "   " + @customer.last_name + @customer.first_name %>様</div>
       </label><br>
 
       <% if @customer.addresses.present? %>
