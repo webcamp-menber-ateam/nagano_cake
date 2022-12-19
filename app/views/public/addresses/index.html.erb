@@ -16,7 +16,7 @@
         <%= f.label :"住所", class: 'ml-4 mt-1'%>
       </div>
       <div class="col-9">
-        <%= f.text_area :postcode, :placeholder => "東京都渋谷区代々木神園町0-0",class: 'col-8 mt-1' %>
+        <%= f.text_area :address, :placeholder => "東京都渋谷区代々木神園町0-0",class: 'col-8 mt-1' %>
       </div>
     </div>
 
@@ -25,7 +25,7 @@
         <%= f.label :"宛名", class: 'ml-4 mt-1'%>
       </div>
       <div class="col-7">
-        <%= f.text_field :postcode, :placeholder => "0000000",class: 'col-5 mt-1' %>
+        <%= f.text_field :name, :placeholder => "0000000",class: 'col-5 mt-1' %>
       </div>
       <div class="col-2">
         <%= f.submit "新規登録", class: 'btn btn-success mt-1' %>
