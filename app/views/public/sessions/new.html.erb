@@ -1,33 +1,37 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 px-5">
-      <h5 class="col-3 ml-1 py-4">ログイン</h5>
+      <h5 class="ml-1 py-3">ログイン</h5>
+  </div>
 
-      <h6 class="col-3 ml-3 py-4">会員の方はこちらからログイン</h6>
-      <%= form_with model: @customer, url: session_path(resource_name) do |f| %>
-        <div class="field form-inline">
-          <%= f.label :メールアドレス, class: 'col-2' %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control w-50', placeholder: 'sample@example.com' %>
-        </div>
+  <div class="row px-4">
+    <h6 class="ml-3 mb-4">会員の方はこちらからログイン</h6>
+  </div>
 
-        <div class="field form-inline mt-3">
-          <%= f.label :パスワード, class: 'col-2' %>
-          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control w-50' %>
-        </div>
+  <div class="row justify-content-center">
+    <%= form_with model: @customer, url: session_path(resource_name), class: 'col-10' do |f| %>
+      <div class="field form-inline row">
+        <%= f.label :メールアドレス, class: 'col-4' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control col-6', placeholder: 'sample@example.com' %>
+      </div>
 
-        <div class="actions text-center mt-3">
+      <div class="field form-inline row mt-3">
+        <%= f.label :パスワード, class: 'col-4' %>
+        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control col-6' %>
+      </div>
+
+      <div class="actions text-center row mt-3">
+        <div class="col-4"></div>
           <%= f.submit "ログイン", class: 'btn btn-sm btn-primary px-4' %>
-        </div>
-      <% end %>
+      </div>
+    <% end %>
+  </div>
 
-      <div class="col-12">
-        <h6 class="col-4 px-4 mt-4">会員登録がお済みでない方</h6>
-        <div class="col-8 ml-5">
+      <div class="row px-4">
+        <h6 class="col-12 px-4 mt-4">会員登録がお済みでない方</h6>
+        <div class="ml-5">
           <%= render "public/shared/links" %>
           <span>　から新規登録を行ってください。</span>
         </div>
       </div>
-    </div>
-  </div>
 </div>
 
