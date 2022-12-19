@@ -6,15 +6,15 @@
         <h4>注文履歴詳細</h4>
         <table class="table table-borderless">
           <tr>
-            <td>購入者</td>
+            <td class="font-weight-bold" style= "width: 160px">購入者</td>
             <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
           </tr>
           <tr>
-            <td>注文日</td>
+            <td class="font-weight-bold">注文日</td>
             <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
           </tr>
           <tr>
-            <td>配送先</td>
+            <td class="font-weight-bold">配送先</td>
             <td><%= @order.delivery_address %></td>
           </tr>
           <tr>
@@ -22,15 +22,18 @@
             <td><%= @order.delivery_name %></td>
           </tr>
           <tr>
-            <td>支払方法</td>
+            <td class="font-weight-bold">支払方法</td>
             <td><%= @order.payment_method %></td>
           </tr>
           <tr>
-            <td>注文ステータス</td>
-            <td>
-              <%= form_with model: Order do |f| %>
-                <%= f.select :order_status, Order.order_statuses.keys.to_a, {} %>:調整中
-                <%= f.submit "更新" %>
+            <td class="font-weight-bold">注文ステータス</td>
+              <%= form_with model: Order, url: admin_order_path(@order.id), method: :patch do |f| %>
+                <td class="col-2">
+                  <%= f.select :order_status, Order.order_statuses.keys.to_a, {}, class: 'form-control' %>:調整中
+                </td>
+                <td>
+                  <%= f.submit "更新", class: 'btn btn-success' %>
+                </td>
               <% end %>
             </td>
           </tr>
@@ -61,12 +64,14 @@
                 <td><%= (detail.product.with_tax_price).to_s(:delimited) %></td>
                 <td><%= detail.amount %></td>
                 <td><%= (detail.subtoal).to_s(:delimited) %></td>
-                <td>
-                  <%= form_with model: detail, url: admin_order_detail_path do |f| %>
-                    <%= f.select :payment_method, OrderDetail.payment_methods.keys.to_a, {} %>:調整中
-                    <%= f.submit "更新" %>
+                  <%= form_with model: detail, url: admin_order_detail_path(detail.id), method: :patch do |f| %>
+                    <td class="col-3">
+                      <%= f.select :payment_method, OrderDetail.creat_statuses.keys.to_a, {}, class: 'form-control' %>:調整中
+                    </td>
+                    <td>
+                      <%= f.submit "更新", class: 'btn btn-success'%>
+                    </td>
                   <% end %>
-                </td>
                 <% @total_price += detail.subtoal %>
               </tr>
             <% end %>
@@ -74,7 +79,7 @@
         </table>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-3 align-self-end">
       <table class="table table-borderless">
         <tr>
           <td>商品合計</td>
