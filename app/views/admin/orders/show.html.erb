@@ -6,7 +6,10 @@
         <h4>注文履歴詳細</h4>
         <table class="table table-borderless">
           <tr>
-            <td class="font-weight-bold" style= "width: 160px">購入者</td>
+            <th style= "width: 160px"></th>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">購入者</td>
             <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
           </tr>
           <tr>
@@ -27,14 +30,13 @@
           </tr>
           <tr>
             <td class="font-weight-bold">注文ステータス</td>
-              <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
-                <td class="col-2">
-                  <%= f.select :order_status, Order.order_statuses_i18n.invert, {}, class: 'form-control' %>
-                </td>
                 <td>
-                  <%= f.submit "更新", class: 'btn btn-success' %>
-                </td>
+              <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
+                  <%= f.select :order_status, Order.order_statuses_i18n.invert, {} %>
+                  <%= f.submit "更新", class: 'btn btn-success btn-sm ml-3' %>
               <% end %>
+                </td>
+
             </td>
           </tr>
         </table>
@@ -54,7 +56,6 @@
               <th>数量</th>
               <th>小計</th>
               <th>製作ステータス</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -64,14 +65,12 @@
                 <td><%= (order_detail.product.with_tax_price).to_s(:delimited) %></td>
                 <td><%= order_detail.amount %></td>
                 <td><%= (order_detail.subtoal).to_s(:delimited) %></td>
+                <td>
                   <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true do |f| %>
-                    <td class="col-3">
-                      <%= f.select :creat_status, OrderDetail.creat_statuses_i18n.invert, {}, class: 'form-control' %>
-                    </td>
-                    <td>
-                      <%= f.submit "更新", class: 'btn btn-success'%>
-                    </td>
+                    <%= f.select :creat_status, OrderDetail.creat_statuses_i18n.invert, {} %>
+                    <%= f.submit "更新", class: 'btn btn-success btn-sm ml-5'%>
                   <% end %>
+                </td>
                 <% @total_price += order_detail.subtoal %>
               </tr>
             <% end %>
