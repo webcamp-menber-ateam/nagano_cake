@@ -24,7 +24,7 @@
               </td>
               <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
               <td><%= order.order_details.where(order_id: order.id).sum(:amount) %></td>
-              <td><%= order.order_status %>：調整中</td>
+              <td><%= order.order_status_i18n %></td>
             </tr>
           <% end %>
         </tbody>

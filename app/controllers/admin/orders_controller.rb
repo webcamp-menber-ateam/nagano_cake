@@ -2,13 +2,13 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @orderdetails = OrderDetail.where(order_id: @order.id)
+    @order_details = OrderDetail.where(order_id: params[:id])
     @total_price = 0
   end
-  
+
   def update
     @order = Order.find(params[:id])
-    @order_details = OrderDetails.where(order_id @order.id)
+    @order_details = OrderDetail.where(order_id: params[:id])
     if @order.update(order_params)
       @order_details.update_all(creat_status: 1) if @order.order_status == "payment_confirmation"
     end
