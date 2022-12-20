@@ -14,6 +14,20 @@
             <th>注文ステータス</th>
           </tr>
         </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td>
+                <%= link_to admin_order_path(order.id) do %>
+                  <%= order.created_at.strftime('%Y/%m/%d %H:%M') %>
+                <% end %>
+              </td>
+              <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+              <td><%= order.order_details.where(order_id: order.id).sum(:amount) %></td>
+              <td><%= order.order_status_i18n %></td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
   </div>
