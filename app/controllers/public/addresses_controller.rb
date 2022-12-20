@@ -1,5 +1,6 @@
 class Public::AddressesController < ApplicationController
   before_action :authenticate_customer!
+  before_action :ensure_correct_customer, only: [:edit]
 
   def index
     @address = Address.new
@@ -23,7 +24,7 @@ class Public::AddressesController < ApplicationController
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
-      redirect_to addresses_path
+      redirect_to addresses_path, notice: "配送先の情報を更新しました。"
     else
       render :edit
     end
@@ -39,4 +40,12 @@ class Public::AddressesController < ApplicationController
   def address_params
     params.require(:address).permit(:postcode, :name, :address)
   end
+
+  def ensure_correct_customer
+    @address = Address.find(params[:id])
+    unless @address.customer == current_customer
+      redirect_to addresses_path
+    end
+  end
+
 end
