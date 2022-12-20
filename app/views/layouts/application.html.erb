@@ -11,21 +11,7 @@
   </head>
 
   <body>
-    <p>a</p>
-    <%= link_to destroy_customer_session_path, method: :delete do %>
-      <i class="fas fa-sign-out-alt"></i> Log out
-    <% end %>
-    <%= link_to new_customer_registration_path do %>
-      <i class="fas fa-user-plus"></i> Sign up
-    <% end %>
-
-    <%= link_to new_customer_session_path do %>
-      <i class="fas fa-sign-in-alt"></i> Log in
-    <% end %>
-    <% if customer_signed_in? %>
-      <%= current_customer.last_name %>
-    <% end %>
-
+    <%= render 'layouts/header' %>
     <%= yield %>
   </body>
 </html>
