@@ -16,8 +16,8 @@ class Public::CartsController < ApplicationController
     if @cart.save
       redirect_to carts_path, notice: "商品を追加しました"
     else
-      @product = Product.find(id: params[:cart][:product_id])
-      render 'product/show'
+      @product = Product.find_by(id: params[:cart][:product_id])
+      redirect_to product_path(@product.id), notice: "購入数を選択してください。"
     end
   end
 
