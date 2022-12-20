@@ -87,16 +87,16 @@ class Public::OrdersController < ApplicationController
   end
 
   def lookup_address
+    # instanceを設定しないならこう記載(ただし毎回読み込むので重くなる)
     # index = PostCodeIndex.new('KEN_ALL.csv')
     # address = index.lookup(params[:order][:delivery_postcode])
     address = PostCodeIndex.instance.lookup(params[:order][:delivery_postcode])
-    
     if address.nil?
       redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
     else
       session[:order] = Order.new(order_params)
       session[:order][:delivery_postcode] = address[:post_code]
-      session[:order][:delivery_address] = address[:prefecture] + address[:city_street]
+      session[:order][:delivery_address] = address[:prefecture] + address[:city] + address[:street]
       @customer = current_customer
       @order = session[:order]
       render :new

@@ -3,18 +3,18 @@ require 'csv'
 require 'singleton'#１回だけ作成、○とセットで運用
 
 class PostCodeIndex
-  include Singleton #１回だけ作成、○とセットで
+  include Singleton #１回だけ作成、○とセットで運用
   def initialize
-    # file = File.join File.dirname(__FILE__), '..', '..', 'config', 'KEN_ALL.csv'
     file = 'app/assets/csv/KEN_ALL.CSV'
     @data = {}
     # 読み込みを行単位で指定
     CSV.foreach(file, encoding: 'Shift_JIS:UTF-8') do |row|
-      post_code, prefecture, city_street = row[2], row[6], row[7]
+      post_code, prefecture, city, street = row[2], row[6], row[7], row[8]
       @data[post_code] = {
         post_code: post_code,
         prefecture: prefecture,
-        city_street: city_street,
+        city: city,
+        street: clean_street(street)
       }
     end
   end
@@ -25,6 +25,13 @@ class PostCodeIndex
 
   def clean_post_code(input)
     input.to_s.tr('０-９', '0-9').gsub(/[^0-9]/, '')
+  end
+
+  private
+  def clean_street(input)
+    return '' if input == '以下に掲載がない場合'
+    # .直前の一文字,*０回以上繰り返す,$ 行末
+    input.sub(/（.*$/, '')
   end
 
 end
