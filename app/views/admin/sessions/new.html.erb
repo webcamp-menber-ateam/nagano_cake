@@ -3,8 +3,8 @@
       <h5 class="ml-1 py-3">管理者ログイン</h5>
   </div>
 
-
   <div class="row justify-content-center">
+    <%= render "admin/shared/error_messages", resource: resource %>
     <%= form_with model: @admin, url: session_path(resource_name), class: 'col-10' do |f| %>
       <div class="field form-inline row">
         <%= f.label :メールアドレス, class: 'col-4' %>
