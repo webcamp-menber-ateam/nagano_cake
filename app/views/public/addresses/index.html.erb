@@ -1,7 +1,9 @@
 <div class="container px-sm-0">
   <%= render 'layouts/errors', obj: @address %>
   <%= flash[:notice] %>
-  <h4>配送先登録/一覧</h4>
+  <div class="col-4 mt-3">
+    <h4 class="p-1 bg-secondary text-white text-center">配送先登録/一覧</h4>
+  </div>
 
   <%= form_with model: @address, local: true do |f| %>
     <div class="form-group row">
@@ -36,14 +38,14 @@
   <% end %>
 </div>
 
-<div class="table-responsive col-7 ml-5 mt-5">
+<div class="table-responsive col-9 ml-5 mt-5">
   <table class="table table-condensed table-bordered">
-    <thead>
+    <thead class="thead-light">
       <tr>
         <th>郵便番号</th>
         <th>住所</th>
         <th>宛名</th>
-        <th colspan="3"></th>
+        <th colspan="4"></th>
       </tr>
     </thead>
     <tbody>
@@ -52,9 +54,9 @@
           <td><%= address.postcode %></td>
           <td><%= address.address %></td>
           <td><%= address.name %></td>
-          <td>
+          <td class="text-center">
             <%= link_to "編集する", edit_address_path(address), class: 'btn btn-success' %>
-            <%= link_to "削除する", address_path(address), data: { confirm: '本当に削除しますか？' }, method: :delete, class: 'btn btn-danger' %>
+            <%= link_to "削除する", address_path(address), data: { confirm: '本当に削除しますか？' }, method: :delete, class: 'btn btn-danger ml-1' %>
           </td>
         </tr>
       <% end %>
