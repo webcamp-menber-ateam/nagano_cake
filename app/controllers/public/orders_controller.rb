@@ -81,10 +81,28 @@ class Public::OrdersController < ApplicationController
       redirect_to new_order_path, notice: "リロードされた為入力画面に戻りました"
       return
     end
-    
+
     @order = Order.find(params[:id])
     @order_details = @order.order_details
   end
+
+  def lookup_address
+    # index = PostCodeIndex.new('KEN_ALL.csv')
+    # address = index.lookup(params[:order][:delivery_postcode])
+    address = PostCodeIndex.instance.lookup(params[:order][:delivery_postcode])
+    
+    if address.nil?
+      redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
+    else
+      session[:order] = Order.new(order_params)
+      session[:order][:delivery_postcode] = address[:post_code]
+      session[:order][:delivery_address] = address[:prefecture] + address[:city_street]
+      @customer = current_customer
+      @order = session[:order]
+      render :new
+    end
+  end
+
 
   private
   def order_params
