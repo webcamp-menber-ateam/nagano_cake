@@ -3,34 +3,34 @@
   <%= flash[:notice] %>
   <h4>配送先登録/一覧</h4>
 
-  <%= form_with model: @address, local: true do |address| %>
+  <%= form_with model: @address, local: true do |f| %>
     <div class="form-group row">
       <div class="col-3">
-        <%= address.label :"郵便番号(ハイフンなし)", class: 'ml-4 mt-4' %>
+        <%= f.label :"郵便番号(ハイフンなし)", class: 'ml-4 mt-4' %>
       </div>
       <div class="col-9">
-        <%= address.text_field :postcode, :placeholder => "0000000", class: 'col-4 mt-4' %>
+        <%= f.text_field :postcode, :placeholder => "0000000", class: 'col-4 mt-4' %>
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-3">
-        <%= address.label :"住所", class: 'ml-4 mt-1'%>
+        <%= f.label :"住所", class: 'ml-4 mt-1'%>
       </div>
       <div class="col-9">
-        <%= address.text_area :address, :placeholder => "東京都渋谷区代々木神園町0-0",class: 'col-8 mt-1' %>
+        <%= f.text_area :address, :placeholder => "東京都渋谷区代々木神園町0-0",class: 'col-8 mt-1' %>
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-3">
-        <%= address.label :"宛名", class: 'ml-4 mt-1'%>
+        <%= f.label :"宛名", class: 'ml-4 mt-1'%>
       </div>
       <div class="col-7">
-        <%= address.text_field :name, :placeholder => "令和道子",class: 'col-5 mt-1' %>
+        <%= f.text_field :name, :placeholder => "令和道子",class: 'col-5 mt-1' %>
       </div>
       <div class="col-2">
-        <%= address.submit "新規登録", class: 'btn btn-success mt-1' %>
+        <%= f.submit "新規登録", class: 'btn btn-success mt-1' %>
       </div>
     </div>
   <% end %>
