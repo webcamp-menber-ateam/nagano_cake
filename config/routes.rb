@@ -43,7 +43,9 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :products, except: [:destroy]
     resources :genres, only: [:index, :create, :edit, :update]
-    resources :customers, only: [:index, :show, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update] do
+      get "orders" => "customers#orders"
+    end
     resources :orders, only: [:show, :update]
     resources :order_details, only: [:update]
   end

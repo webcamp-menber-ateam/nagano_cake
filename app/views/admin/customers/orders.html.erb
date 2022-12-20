@@ -3,9 +3,12 @@
   <div class="row">
     <div class="col">
       <div class="px-5 pt-5">
-        <h4>注文履歴一覧</h4>
+        <h4><%= @customer.last_name %><%= @customer.first_name %>さんの注文履歴一覧</h4>
       </div>
       <%= render 'admin/homes/index', orders: @orders %>
+      <% if @orders.blank? %>
+        <p>注文履歴はありません。</p>
+      <% end %>
     </div>
   </div>
 </div>
