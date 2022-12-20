@@ -22,8 +22,10 @@
         <% @carts.each do |cart| %>
         <tbody>
           <tr>
-            <!--画像は< %= image_tag cart.products.get_material_image(50,50)%>-->
-            <td class="align-middle border border-dark"><%= cart.product.name %></td>
+            <td class="align-middle border border-dark">
+              <%= image_tag cart.product.get_image(70, 70) %>
+              <%= cart.product.name %>
+            </td>
             <td class="align-middle border border-dark"><%= (cart.product.with_tax_price).to_s(:delimited) %></td>
             <%= form_with model: cart, url: cart_path(cart.id), method: :patch do |f| %>
             <td class="align-middle border border-dark text-center"><%= f.select :amount, *[1..99], selected: cart.amount, class: "form-control" %>

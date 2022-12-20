@@ -1,7 +1,7 @@
 <div class ="container">
   <div class="row">
     <div class="col-8">
-      <table class="table">
+      <table class="table table-borderless">
         <thead>
           <tr class="table-active">
             <th class="border border-dark">商品名</th>
@@ -13,7 +13,10 @@
         <% @carts.each do |cart| %>
         <tbody>
           <tr>
-            <td class="align-middle border border-dark"><%= cart.product.name %></td>
+            <td class="align-middle border border-dark">
+              <%= image_tag cart.product.get_image(70, 70) %>
+              <%= cart.product.name %>
+            </td>
             <td class="align-middle border border-dark"><%= (cart.product.with_tax_price).to_s(:delimited) %></td>
             <td class="align-middle border border-dark"><%= cart.amount %></td>
             <td class="align-middle border border-dark"><%= (cart.subtoal).to_s(:delimited) %></td>
@@ -37,7 +40,7 @@
     </div>
 
     <div class="col-4">
-      <table class="table">
+      <table class="table table-borderless">
         <tr>
           <th class="border border-dark table-active">送料</th>
           <td class="border border-dark"><%= (@order.postage).to_s(:delimited) %></td>

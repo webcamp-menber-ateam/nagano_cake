@@ -1,23 +1,72 @@
 <div class="container">
+  <h6 class="p-1 bg-secondary text-white">注文履歴詳細</h6>
   <div class="row">
-    <div class="col">
-      <h6 class="p-1 bg-secondary text-white">注文履歴詳細</h6>
-      <div class="col-8">
-        <table class="table">
-            <tr>
-              <th>
-              </th>
-            </tr>
-        </table>  
-      </div>
-      
-      <div class="col-4">
-        
-      </div>
-      
-      <div class="col-12">
-        
-      </div>
+    <div class="col-8">
+      <table class="table">
+        <h6 class="font-weight-bold">注文情報</h6>
+        <tr>
+          <th class="align-middle border border-dark table-active">注文日</th>
+          <td class="align-middle border border-dark"><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+        <tr>
+          <th class="align-middle border border-dark table-active">配送先</th>
+          <td class="align-middle border border-dark">
+            <%= "〒 " + @order.delivery_postcode %><br>
+            <%= @order.delivery_address %><br>
+            <%= @order.delivery_name %>
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle border border-dark table-active">支払い方法</th>
+          <td class="align-middle border border-dark"><%= @order.payment_method_i18n %></td>
+        </tr>
+        <tr>
+          <th class="align-middle border border-dark table-active">ステータス</th>
+          <td class="align-middle border border-dark"><%= @order.order_status_i18n%></td>
+        </tr>
+      </table>  
+    </div>
+    
+    <div class="col-4">
+      <table class="table">
+        <h6 class="font-weight-bold">請求情報</h6>
+        <tr>
+          <th class="align-middle border border-dark table-active">商品合計</th>
+          <td class="align-middle border border-dark text-right"><%= (@order.total_price - @order.postage).to_s(:delimited) + "円" %></td>
+        </tr>
+        <tr>
+          <th class="align-middle border border-dark table-active">配送料</th>
+          <td class="align-middle border border-dark text-right"><%= @order.postage.to_s(:delimited) + "円" %></td>
+        </tr>
+        <tr>
+          <th class="align-middle border border-dark table-active">ご請求額</th>
+          <td class="align-middle border border-dark text-right"><%= @order.total_price.to_s(:delimited) + "円" %></td>
+        </tr>
+      </table>  
+    </div>
+    
+    <div class="col-12">
+      <h6 class="font-weight-bold">注文内容</h6>
+      <table class="table table-borderless">
+        <thead class="thead-light">
+          <tr>
+            <th class="border border-dark">商品</th>
+            <th class="border border-dark">単価(税込)</th>
+            <th class="border border-dark">個数</th>
+            <th class="border border-dark">小計</th>
+          </tr>
+        </thead>
+        <% @order_details.each do |order_detail| %>
+        <tbody>
+          <tr>
+            <td class="border border-dark"><%= order_detail.product.name %></td>
+            <td class="border border-dark"><%= order_detail.product.with_tax_price.to_s(:delimited) + "円"%></td>
+            <td class="border border-dark"><%= order_detail.amount %></td>
+            <td class="border border-dark"><%= order_detail.subtoal.to_s(:delimited) + "円" %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>
