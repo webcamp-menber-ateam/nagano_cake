@@ -3,7 +3,6 @@
     <div class="col-12">
       <h5 class="mx-4 ml-5">注文情報入力</h5>
       <%= form_with model: @order, url: confirm_orders_path, method: :post do |f| %>
-      <!--Order.payment_methods_i18n.invert-->
       <h6 class="my-2 font-weight-bold">支払い方法</h6>
       <label class="mx-0 ml-4"><%= f.radio_button(:payment_method, Order.payment_methods.key(0), checked: "checked") %>
       <%= Order.payment_methods_i18n[:credit_card] %></label><br>

@@ -50,19 +50,40 @@ class Public::OrdersController < ApplicationController
   end
   
   def create
-    order = Order.new(session[:order])
-    order.save
-    session[:order].clear
+    # トランザクション処理の指定(途中でエラーの場合は全てロールバックされる)
+    ActiveRecord::Base.transaction do
+      order = Order.new(session[:order])
+      order.save
+      
+      # 商品詳細の作成
+      detail_item = current_customer.carts
+      detail_item.each do |item|
+        order_detail = OrderDetail.new(order_detail_params)
+        order_detail.order_id = order.id
+        order_detail.product_id = item.product_id
+        order_detail.amount = item.amount
+        order_detail.price = item.product.price
+        order_detail.creat_status = 0
+        order_detail.save
+      end
+      detail_item.destroy_all
+      session[:order].clear
+    end
+    redirect_to complete_orders_path
   end
 
-  # def show
-  #   @order = Order.find(params[:id])
-  #   @order_details = @order.order_details
-  # end
+  def show
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
+  end
   
   private
   def order_params
     params.require(:order).permit(:customer_id, :postage, :total_price, :order_status,
     :payment_method, :delivery_postcode, :delivery_address, :delivery_name)
+  end
+  
+  def order_detail_params
+    params.permit(:order_id, :product_id, :amount, :price, :creat_status)
   end
 end
