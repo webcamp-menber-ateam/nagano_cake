@@ -18,11 +18,15 @@
           <% @orders.each do |order| %>
             <tr>
               <td>
-                <%= link_to admin_order_path(order.id) do %>
-                  <%= order.created_at.strftime('%Y/%m/%d %H:%M') %>
+                <%= link_to admin_order_path(order.id), class: 'text-body' do %>
+                  <u><%= order.created_at.strftime('%Y/%m/%d %H:%M') %></u>
                 <% end %>
               </td>
-              <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+              <td>
+                <%= link_to admin_customer_path(order.customer.id), class: 'text-body' do %>
+                  <u><%= order.customer.last_name %><%= order.customer.first_name %></u>
+                <% end %>
+              </td>
               <td><%= order.order_details.where(order_id: order.id).sum(:amount) %></td>
               <td><%= order.order_status_i18n %></td>
             </tr>
