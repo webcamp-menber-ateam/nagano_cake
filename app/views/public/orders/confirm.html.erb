@@ -1,0 +1,59 @@
+<div class ="container">
+  <div class="row">
+    <div class="col-8">
+      <table class="table table-borderless">
+        <thead>
+          <tr class="table-active">
+            <th class="border border-dark">商品名</th>
+            <th class="border border-dark">単価(税込)</th>
+            <th class="border border-dark">数量</th>
+            <th class="border border-dark">小計</th>
+          </tr>
+        </thead>
+        <% @carts.each do |cart| %>
+        <tbody>
+          <tr>
+            <td class="align-middle border border-dark">
+              <%= image_tag cart.product.get_image(70, 70) %>
+              <%= cart.product.name %>
+            </td>
+            <td class="align-middle border border-dark"><%= (cart.product.with_tax_price).to_s(:delimited) %></td>
+            <td class="align-middle border border-dark"><%= cart.amount %></td>
+            <td class="align-middle border border-dark"><%= (cart.subtoal).to_s(:delimited) %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+
+      <div class="mb-4">
+        <h6 class="font-weight-bold">支払い方法</h6>
+        <%= @order.payment_method_i18n %>
+      </div>
+      <div class="mb-4">
+        <h6 class="font-weight-bold">お届け先</h6>
+        <%="〒 " + @order.delivery_postcode + @order.delivery_address%><br>
+        <%= @order.delivery_name + "様" %>
+      </div>
+      <div>
+        <%= link_to "注文を確定する", orders_path, method: :post, class: "btn btn-success"%>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <table class="table table-borderless">
+        <tr>
+          <th class="border border-dark table-active">送料</th>
+          <td class="border border-dark"><%= (@order.postage).to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th class="border border-dark table-active">商品合計</th>
+          <td class="border border-dark"><%= @total.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th class="border border-dark table-active">請求金額</th>
+          <td class="border border-dark"><%= (@order.total_price).to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
