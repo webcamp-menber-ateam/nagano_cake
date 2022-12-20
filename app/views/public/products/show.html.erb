@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-3">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td class="align-middle"><%= genre.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row">
+        <%= image_tag @product.get_image(230, 120), class: 'ml-md-3' %>
+
+        <div class="col-6 ml-md-3">
+          <h5 class="mb-1 font-weight-bold"><%= @product.name %></h5>
+          <p class="my-4"><%= @product.explanation %></p>
+          <div class="row">
+            <h5 class="ml-md-3">¥ <%= @product.with_tax_price %></h5>
+            <p class="small ml-1 d-flex align-items-end"> (税込)</p>
+          </div>
+
+          <div class="row d-flex justify-content-evenly">
+            <%= form_with model: @cart, url: carts_path, method: :post, class: 'ml-md-3' do |f| %>
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.select :amount, *[1..10], min: 0, include_blank: "個数選択", class: 'mr-md-3' %>
+              <%= f.submit "カートに入れる", class: 'btn btn-sm btn-success' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
