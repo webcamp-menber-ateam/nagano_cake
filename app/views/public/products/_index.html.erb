@@ -1,8 +1,13 @@
+<!--モーダルの周囲を薄暗くするマスク-->
+<div id="mask" class="hidden"></div>
+<!--あとからJavaScriptで置き換え。-->
+<div id="modal" class="hidden"></div>
+
 <div>
   <div class="d-flex flex-wrap">
     <% products.each do |product| %>
       <div class="d-flex flex-column mr-3 mb-4">
-        <%= link_to product_path(product) do %>
+        <%= link_to product_path(product),remote: true do %>
           <%= image_tag product.get_image(150, 100), class: 'mb-2' %>
         <% end %>
         <span class="mb-1"><%= product.name %></span>

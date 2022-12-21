@@ -8,5 +8,9 @@ class Public::ProductsController < ApplicationController
     @cart = Cart.new
     @genres = Genre.all
     @product = Product.find(params[:id])
+    respond_to do |format|
+      # リクエストはjs形式で行われる
+      format.js
+    end
   end
 end
