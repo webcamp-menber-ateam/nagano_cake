@@ -1,4 +1,5 @@
 class Public::CartsController < ApplicationController
+  before_action :customer_signed_in_check
 
   def index
     @cart = Cart.new
@@ -50,6 +51,10 @@ class Public::CartsController < ApplicationController
   private
   def cart_params
     params.require(:cart).permit(:customer_id, :product_id, :amount)
+  end
+  
+  def customer_signed_in_check
+    redirect_to products_path, notice: "ログインしてください" unless customer_signed_in?
   end
 
 end

@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :customer_signed_in_check
+  
   def new
     @customer = current_customer
     @order = Order.new
@@ -111,5 +113,9 @@ class Public::OrdersController < ApplicationController
 
   def order_detail_params
     params.permit(:order_id, :product_id, :amount, :price, :creat_status)
+  end
+  
+  def customer_signed_in_check
+    redirect_to root_path, notice: "ログインしてください" unless customer_signed_in?
   end
 end
