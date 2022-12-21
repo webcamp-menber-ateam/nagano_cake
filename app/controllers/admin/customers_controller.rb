@@ -1,7 +1,7 @@
-class Admin::CustomersController < ApplicationController
+class Admin::CustomersController < Admin::ApplicationController
 
   def index
-    @customers = Customer.all
+    @customers = Customer.page(params[:page])
   end
 
   def show
@@ -20,7 +20,7 @@ class Admin::CustomersController < ApplicationController
 
   def orders
     @customer = Customer.find(params[:customer_id])
-    @orders = Order.where(customer_id: params[:customer_id])
+    @orders = Order.where(customer_id: params[:customer_id]).page(params[:page])
   end
 
   private
