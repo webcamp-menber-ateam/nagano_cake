@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+  
   def new
     @customer = current_customer
     @order = Order.new
@@ -81,10 +83,27 @@ class Public::OrdersController < ApplicationController
       redirect_to new_order_path, notice: "リロードされた為入力画面に戻りました"
       return
     end
-    
+
     @order = Order.find(params[:id])
     @order_details = @order.order_details
   end
+
+  def lookup_address
+    # instanceを設定しないならこう記載(ただし毎回読み込むので重くなる)
+    # index = PostCodeIndex.new('KEN_ALL.csv')
+    # address = index.lookup(params[:order][:delivery_postcode])
+    address = PostCodeIndex.instance.lookup(params[:order][:delivery_postcode])
+    if address.nil?
+      redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
+    else
+      @order = Order.new(order_params)
+      @order.delivery_postcode = address[:post_code]
+      @order.delivery_address = address[:prefecture] + address[:city] + address[:street]
+      @customer = current_customer
+      render :new
+    end
+  end
+
 
   private
   def order_params
@@ -95,4 +114,5 @@ class Public::OrdersController < ApplicationController
   def order_detail_params
     params.permit(:order_id, :product_id, :amount, :price, :creat_status)
   end
+  
 end
