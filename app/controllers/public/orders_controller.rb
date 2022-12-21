@@ -2,8 +2,12 @@ class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
   
   def new
-    @customer = current_customer
-    @order = Order.new
+    if current_customer.carts.blank?
+      redirect_to root_path, notice: "カートに商品を入れてください"
+    else
+      @customer = current_customer
+      @order = Order.new
+    end
   end
 
   def index
@@ -34,10 +38,10 @@ class Public::OrdersController < ApplicationController
       session[:order][:delivery_address] = current_customer.address.freeze
       session[:order][:delivery_name] = (current_customer.last_name + current_customer.first_name).freeze
     elsif delivery_destination == 2
-      delivary = Address.find(id: params[:order][:delivery_adress])
-      session[:order][:delivery_postcode] = delivary.postcode.freeze
-      session[:order][:delivery_address] = delivary.address.freeze
-      session[:order][:delivery_name] = delivary.name.freeze
+      delivery = Address.find(params[:order][:address_id])
+      session[:order][:delivery_postcode] = delivery.postcode.freeze
+      session[:order][:delivery_address] = delivery.address.freeze
+      session[:order][:delivery_name] = delivery.name.freeze
     else
       session[:order][:delivery_postcode] = params[:order][:delivery_postcode].freeze
       session[:order][:delivery_address] = params[:order][:delivery_address].freeze

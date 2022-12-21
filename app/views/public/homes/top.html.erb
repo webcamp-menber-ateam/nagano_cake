@@ -1,7 +1,21 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'public/products/genre', genres: @genres %>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td class="align-middle"><%= genre.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
     </div>
 
     <div class="col-8 offset-1'">
@@ -15,18 +29,21 @@
       <h4 class ="mt-3">新着商品</h4>
     </div>
   </div>
-
+  
   <div class="row mt-3 justify-content-around">
     <div class="col-3"></div>
     <% @products.each do |product| %>
-      <div class="col">
-        <%= image_tag product.get_image(130, 130)%><br>
-        <%= product.name %><br>
-        <%= "¥" + product.price.to_s(:delimited) %>
-      </div>
-    <% end %>
-    <div class="col-12 text-right">
-      <%= link_to "全ての商品を見る>", products_path %>
+    <div class="col">
+      <%= link_to product_path(product.id) do %>
+        <%= image_tag product.get_image(130, 130)%>
+      <% end %><br>
+      <%= product.name %><br>
+      <%= "¥" + product.price.to_s(:delimited) %>
     </div>
+    <% end %>
+  </div>
+  
+  <div class="col-12 text-right">
+    <%= link_to "全ての商品を見る>", products_path %>
   </div>
 </div>
