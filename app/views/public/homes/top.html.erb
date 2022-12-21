@@ -1,23 +1,8 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-3">
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th class="text-center">ジャンル検索</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @genres.each do |genre| %>
-            <tr>
-              <td class="align-middle"><%= genre.name %></td>
-            </tr>
-          <% end %>
-        </tbody>
-
-      </table>
+      <%= render '/public/products/genre', genres: @genres %>
     </div>
-
     <div class="col-8 offset-1'">
       <%= image_tag "top_image.png", style: "width: 800px; height: 400px; position: relative;" %>
       <p style="position:absolute; top:120px; left:160px; background-color:rgba(0,0,0,0.0); color:#FFF; font-size:22px;">
