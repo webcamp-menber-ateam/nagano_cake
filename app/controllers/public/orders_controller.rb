@@ -94,11 +94,10 @@ class Public::OrdersController < ApplicationController
     if address.nil?
       redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
     else
-      session[:order] = Order.new(order_params)
-      session[:order][:delivery_postcode] = address[:post_code]
-      session[:order][:delivery_address] = address[:prefecture] + address[:city] + address[:street]
+      @order = Order.new(order_params)
+      @order.delivery_postcode = address[:post_code]
+      @order.delivery_address = address[:prefecture] + address[:city] + address[:street]
       @customer = current_customer
-      @order = session[:order]
       render :new
     end
   end
