@@ -7,13 +7,13 @@
     <%= form_with model: @customer, url: information_customers_path do |f| %>
       <div class="field row mt-2">
         <p class="col-3">名前</p>
-        <%= f.text_field :last_name, autofocus: true, placeholder: '令和' %>
+        <%= f.text_field :last_name, autofocus: true, placeholder: '令和', class: "mr-md-5" %>
         <%= f.text_field :first_name, autofocus: true, placeholder: '道子' %>
       </div>
 
       <div class="field row mt-2">
         <p class="col-3">フリガナ</p>
-        <%= f.text_field :last_name_kana, autofocus: true, placeholder: 'レイワ' %>
+        <%= f.text_field :last_name_kana, autofocus: true, placeholder: 'レイワ', class: "mr-md-5" %>
         <%= f.text_field :first_name_kana, autofocus: true, placeholder: 'ミチコ' %>
       </div>
 
@@ -39,7 +39,7 @@
 
       <div class="actions row mt-3">
         <div class="col-3"></div>
-        <%= f.submit "編集内容を保存",class: "btn btn-sm btn-success px-5" %>
+        <%= f.submit "編集内容を保存",class: "btn btn-sm btn-success px-5 mr-md-5" %>
         <div class="col-1"></div>
         <%= link_to "退会する", unsubscribe_customers_path, class: "btn btn-sm btn-danger px-3" %>
       </div>
