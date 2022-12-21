@@ -2,7 +2,7 @@
   <div class="d-flex flex-wrap">
     <% products.each do |product| %>
       <div class="d-flex flex-column mr-3 mb-4">
-        <%= link_to product_path(product) do %>
+        <%= link_to product_path(product.id) do %>
           <%= image_tag product.get_image(150, 100), class: 'mb-2' %>
         <% end %>
         <span class="mb-1"><%= product.name %></span>

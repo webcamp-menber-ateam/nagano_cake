@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       collection do
         post "confirm"=>"orders#confirm"
         get "complete"=>"orders#complete"
+        get 'lookup_address', to: 'orders#lookup_address'
       end
     end
     resources :addresses, except: [:new, :show]

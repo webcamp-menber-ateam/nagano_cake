@@ -1,7 +1,13 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+  
   def new
-    @customer = current_customer
-    @order = Order.new
+    if current_customer.carts.blank?
+      redirect_to root_path, notice: "カートに商品を入れてください"
+    else
+      @customer = current_customer
+      @order = Order.new
+    end
   end
 
   def index
@@ -32,10 +38,10 @@ class Public::OrdersController < ApplicationController
       session[:order][:delivery_address] = current_customer.address.freeze
       session[:order][:delivery_name] = (current_customer.last_name + current_customer.first_name).freeze
     elsif delivery_destination == 2
-      delivary = Address.find(id: params[:order][:delivery_adress])
-      session[:order][:delivery_postcode] = delivary.postcode.freeze
-      session[:order][:delivery_address] = delivary.address.freeze
-      session[:order][:delivery_name] = delivary.name.freeze
+      delivery = Address.find(params[:order][:address_id])
+      session[:order][:delivery_postcode] = delivery.postcode.freeze
+      session[:order][:delivery_address] = delivery.address.freeze
+      session[:order][:delivery_name] = delivery.name.freeze
     else
       session[:order][:delivery_postcode] = params[:order][:delivery_postcode].freeze
       session[:order][:delivery_address] = params[:order][:delivery_address].freeze
@@ -81,10 +87,24 @@ class Public::OrdersController < ApplicationController
       redirect_to new_order_path, notice: "リロードされた為入力画面に戻りました"
       return
     end
-    
+
     @order = Order.find(params[:id])
     @order_details = @order.order_details
   end
+
+  def lookup_address
+    address = PostCodeIndex.instance.lookup(params[:order][:delivery_postcode])
+    if address.nil?
+      redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
+    else
+      @order = Order.new(order_params)
+      @order.delivery_postcode = address[:post_code]
+      @order.delivery_address = address[:prefecture] + address[:city] + address[:street]
+      @customer = current_customer
+      render :new
+    end
+  end
+
 
   private
   def order_params
@@ -95,4 +115,5 @@ class Public::OrdersController < ApplicationController
   def order_detail_params
     params.permit(:order_id, :product_id, :amount, :price, :creat_status)
   end
+  
 end
