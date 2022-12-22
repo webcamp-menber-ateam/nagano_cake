@@ -23,7 +23,7 @@
         <label class="mb-3 ml-4">
           <%= f.radio_button(:delivery_select, 2)%>
           <span>登録済み住所から選択</span>
-          <div class="ml-4"><%= f.collection_select(:delivary_address, @customer.addresses, :id, :address, {}, style: "width:500px") %></div>
+          <div class="ml-4"><%= f.collection_select(:address_id, @customer.addresses, :id, :address_display, {}, style: "width:600px") %></div>
         </label><br>
       <% end %>
 

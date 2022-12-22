@@ -23,4 +23,9 @@ class Product < ApplicationRecord
     tax = 1.1
     (price * tax).floor
   end
+
+  def self.search(search)
+    return Product.all unless search
+    Product.where(['name LIKE ?', "%#{search}%"])
+  end
 end

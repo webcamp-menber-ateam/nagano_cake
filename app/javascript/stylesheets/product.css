@@ -1,3 +1,31 @@
+.slider {
+    position:relative;
+  z-index: 1;
+  /*↑z-indexの値をh1のz-indexの値よりも小さくして背景に回す*/
+  height: 400px;
+}
+
+.slider-item {
+    width: 100%;/*各スライダー全体の横幅を画面の高さいっぱい（100%）にする*/
+    height: 400px;/*各スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+    background-repeat: no-repeat;/*背景画像をリピートしない*/
+    background-position: center;/*背景画像の位置を中央に*/
+    background-size: cover;/*背景画像が.slider-item全体を覆い表示*/
+}
+
+h5{
+  position: absolute;
+  z-index: 2;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+  /*font-size: 2vw;*/
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/*以下モーダル処理*/
 #mask {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;

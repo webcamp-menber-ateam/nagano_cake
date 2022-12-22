@@ -1,7 +1,8 @@
 <div class="container px-5 px-sm-0">
+  <%= render 'layouts/errors', obj: @genre %>
   <div class="row">
     <div class="col-6">
-      <div class="px-5 pt-5">
+      <div class="px-5 py-4">
         <h4>ジャンル編集</h4>
       </div>
       <%= form_with model: [:admin, @genre] do |f| %>
