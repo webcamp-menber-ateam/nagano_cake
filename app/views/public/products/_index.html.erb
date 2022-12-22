@@ -1,11 +1,11 @@
 <div>
   <div class="d-flex flex-wrap">
     <% products.each do |product| %>
-      <div class="d-flex flex-column mr-3 mb-4">
+      <div class="d-flex flex-column mr-4 mb-4">
         <%= link_to product_path(product.id) do %>
-          <%= image_tag product.get_image(150, 100), class: 'mb-2' %>
+          <%= image_tag product.get_image(170, 120), class: 'img-fluid mb-2 mr-2' %>
         <% end %>
-        <span class="mb-1"><%= product.name %></span>
+        <span class="mb-1 vw"><%= product.name %></span>
         <span class="">¥<%= product.price %></span>
       </div>
     <% end %>
