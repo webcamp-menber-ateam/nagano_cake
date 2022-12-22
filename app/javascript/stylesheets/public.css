@@ -1,0 +1,47 @@
+ /* topページ */
+ .top_massage {
+  /*font-family: "Kaisei Decol", "Hina Mincho";*/
+  font-weight: bold;
+  background-color:rgba(0,0,0,0.0);
+  color:#FFF;
+  font-size:22px;
+ }
+
+
+ /* 商品一覧 */
+ .product_name {
+   width: 160px;
+   overflow-wrap: break-word;
+ }
+
+
+/* ページネーション */
+/*.pagination {*/
+  /*justify-content: center;*/
+  /*text: center;*/
+/*}*/
+
+.pagination>li {
+  vertical-align: baseline;
+  margin: 0 5px;
+  /*background-color: red;*/
+}
+
+.pagination>li>a {
+  border: none;
+  color: #343a40;
+}
+
+.pagination>.current {
+ /*background-color: #666666;*/
+  background: #93c9ff;
+  border-radius: 15px;
+  height: 30px;
+  width: 30px;
+}
+
+.pagination>li:hover {
+  border-radius: 50%;
+  background-color: red;
+  border: red;
+}

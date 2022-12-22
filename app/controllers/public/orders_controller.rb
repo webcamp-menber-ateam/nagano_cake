@@ -1,9 +1,9 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def new
     if current_customer.carts.blank?
-      redirect_to root_path, notice: "カートに商品を入れてください"
+      redirect_to root_path, alert: "カートに商品を入れてください"
     else
       @customer = current_customer
       @order = Order.new
@@ -48,7 +48,7 @@ class Public::OrdersController < ApplicationController
       session[:order][:delivery_name] = params[:order][:delivery_name].freeze
     end
     if delivery_destination == 3 && (params[:order][:delivery_postcode].blank? || params[:order][:delivery_address].blank? || params[:order][:delivery_name].blank?)
-      redirect_to request.referer, notice: "お届け先の入力不足項目があります"
+      redirect_to request.referer, alert: "お届け先の入力不足項目があります"
     end
     @carts = current_customer.carts
     @order = session[:order]
@@ -95,7 +95,7 @@ class Public::OrdersController < ApplicationController
   def lookup_address
     address = PostCodeIndex.instance.lookup(params[:order][:delivery_postcode])
     if address.nil?
-      redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
+      redirect_to request.referer, alert: "該当する郵便番号はありませんでした"
     else
       @order = Order.new(order_params)
       @order.delivery_postcode = address[:post_code]
@@ -115,5 +115,5 @@ class Public::OrdersController < ApplicationController
   def order_detail_params
     params.permit(:order_id, :product_id, :amount, :price, :creat_status)
   end
-  
+
 end

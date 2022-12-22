@@ -8,11 +8,22 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/earlyaccess/hannari.css" rel="stylesheet">
   </head>
 
   <body>
     <%= render 'layouts/header' %>
     <main>
+      <% if flash[:notice] %>
+        <div class="alert alert-success" role="alert">
+          <i class="fas fa-check-circle"></i><apan class="ml-2"><%= notice %></apan>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger" role="alert">
+          <i class="fas fa-exclamation-triangle"></i><apan class="ml-2"><%= alert %></apan>
+        </div>
+      <% end %>
       <%= yield %>
     </main>
     <%= render 'layouts/footer' %>
