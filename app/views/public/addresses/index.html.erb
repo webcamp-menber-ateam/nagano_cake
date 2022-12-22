@@ -11,7 +11,8 @@
         <%= f.label :"郵便番号(ハイフンなし)", class: 'ml-4 mt-4' %>
       </div>
       <div class="col-9">
-        <%= f.text_field :postcode, :placeholder => "0000000", class: 'col-4 mt-4' %>
+        <%= f.text_field :postcode, :placeholder => "0000000", value: @address.postcode, class: 'col-4 mt-4' %>
+        <%= f.submit "検索", formaction: lookup_address_addresses_path, formmethod: :get %>
       </div>
     </div>
 
@@ -20,7 +21,7 @@
         <%= f.label :"住所", class: 'ml-4 mt-1'%>
       </div>
       <div class="col-9">
-        <%= f.text_area :address, :placeholder => "東京都渋谷区代々木神園町0-0",class: 'col-8 mt-1' %>
+        <%= f.text_area :address, :placeholder => "東京都渋谷区代々木神園町0-0", value: @address.address, class: 'col-8 mt-1' %>
       </div>
     </div>
 

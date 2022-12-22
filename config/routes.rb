@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       patch "information"=>"customers#update"
       get "unsubscribe"=>"customers#unsubscribe"
       patch "withdrawal"=>"customers#withdrawal"
+      get 'lookup_address', to: 'customers#lookup_address'
     end
     resources :carts, only: [:index, :update, :create, :destroy] do
       collection do
@@ -31,7 +32,11 @@ Rails.application.routes.draw do
         get 'lookup_address', to: 'orders#lookup_address'
       end
     end
-    resources :addresses, except: [:new, :show]
+    resources :addresses, except: [:new, :show] do
+      collection do
+        get 'lookup_address', to: 'addresses#lookup_address'
+      end
+    end
   end
 
   # 管理者用

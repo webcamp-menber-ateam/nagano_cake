@@ -34,6 +34,19 @@ class Public::AddressesController < ApplicationController
     Address.find(params[:id]).destroy
     redirect_to request.referer, notice: "配送先の情報を削除しました。"
   end
+  
+  def lookup_address
+    binding.pry
+    address = PostCodeIndex.instance.lookup(params[:customer][:delivery_postcode])
+    if address.nil?
+      redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
+    else
+      @address = Address.new(address_params)
+      @address.postcode = address[:post_code]
+      @address.address = address[:prefecture] + address[:city] + address[:street]
+      render :new
+    end
+  end
 
   private
 
