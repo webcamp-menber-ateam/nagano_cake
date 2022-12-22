@@ -26,7 +26,10 @@
         <p class="col-4">メールアドレス</p>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com' %>
       </div>
-
+      
+      <% if session[:customer].nil? %>
+        <% session[:customer] = Customer.new %>
+      <% end %>
       <div class="field row mt-2">
         <p class="col-4">郵便番号(ハイフンなし)</p>
         <%= f.text_field :postcode, autofocus: true, value: session[:customer]["postcode"], placeholder: '0000000' %>

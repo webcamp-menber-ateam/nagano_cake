@@ -36,15 +36,14 @@ class Public::AddressesController < ApplicationController
   end
   
   def lookup_address
-    binding.pry
-    address = PostCodeIndex.instance.lookup(params[:customer][:delivery_postcode])
+    address = PostCodeIndex.instance.lookup(params[:address][:postcode])
     if address.nil?
       redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
     else
-      @address = Address.new(address_params)
-      @address.postcode = address[:post_code]
-      @address.address = address[:prefecture] + address[:city] + address[:street]
-      render :new
+      session[:address] = Address.new(address_params)
+      session[:address][:postcode] = address[:post_code]
+      session[:address][:address] = address[:prefecture] + address[:city] + address[:street]
+      redirect_to request.referer
     end
   end
 
