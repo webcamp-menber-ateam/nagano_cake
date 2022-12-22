@@ -27,12 +27,12 @@ class Public::CustomersController < ApplicationController
   def lookup_address
     address = PostCodeIndex.instance.lookup(params[:customer][:postcode])
     if address.nil?
-      redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
+      redirect_to request.referer, alert: "該当する郵便番号はありませんでした"
     else
-      session[:customer] = Customer.new
+      session[:customer] = Customer.new(customer_params)
       session[:customer][:postcode] = address[:post_code]
       session[:customer][:address] = address[:prefecture] + address[:city] + address[:street]
-      redirect_to new_customer_registration_path
+      redirect_to request.referer
     end
   end
 
