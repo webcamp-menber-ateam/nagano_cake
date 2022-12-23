@@ -1,9 +1,9 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def new
     if current_customer.carts.blank?
-      redirect_to root_path, notice: "カートに商品を入れてください"
+      redirect_to root_path, alert: "カートに商品を入れてください"
     else
       @customer = current_customer
       @order = Order.new
@@ -32,12 +32,12 @@ class Public::OrdersController < ApplicationController
     session[:order][:payment_method] = params[:order][:payment_method]
 
     # 配送先処理
-    delivery_destination = params[:order][:delivery_select].to_i
-    if delivery_destination == 1
+    @delivery_destination = params[:order][:delivery_select].to_i
+    if @delivery_destination == 1
       session[:order][:delivery_postcode] = current_customer.postcode.freeze
       session[:order][:delivery_address] = current_customer.address.freeze
       session[:order][:delivery_name] = (current_customer.last_name + current_customer.first_name).freeze
-    elsif delivery_destination == 2
+    elsif @delivery_destination == 2
       delivery = Address.find(params[:order][:address_id])
       session[:order][:delivery_postcode] = delivery.postcode.freeze
       session[:order][:delivery_address] = delivery.address.freeze
@@ -47,8 +47,8 @@ class Public::OrdersController < ApplicationController
       session[:order][:delivery_address] = params[:order][:delivery_address].freeze
       session[:order][:delivery_name] = params[:order][:delivery_name].freeze
     end
-    if delivery_destination == 3 && (params[:order][:delivery_postcode].blank? || params[:order][:delivery_address].blank? || params[:order][:delivery_name].blank?)
-      redirect_to request.referer, notice: "お届け先の入力不足項目があります"
+    if @delivery_destination == 3 && (params[:order][:delivery_postcode].blank? || params[:order][:delivery_address].blank? || params[:order][:delivery_name].blank?)
+      redirect_to request.referer, alert: "お届け先の入力不足項目があります"
     end
     @carts = current_customer.carts
     @order = session[:order]
@@ -59,11 +59,20 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    binding.pry
     # トランザクション処理の指定(途中でエラーの場合は全てロールバックされる)
     ActiveRecord::Base.transaction do
       order = Order.new(session[:order])
       order.save
-
+      
+      if params[:check].present? && params[:check].to_i == 1 
+        new_address = Address.new
+        new_address.customer_id = order.customer_id
+        new_address.postcode = order.delivery_postcode
+        new_address.address = order.delivery_address
+        new_address.name = order.delivery_name
+        new_address.save
+      end
       # 商品詳細の作成
       detail_item = current_customer.carts
       detail_item.each do |item|
@@ -95,7 +104,7 @@ class Public::OrdersController < ApplicationController
   def lookup_address
     address = PostCodeIndex.instance.lookup(params[:order][:delivery_postcode])
     if address.nil?
-      redirect_to request.referer, notice: "該当する郵便番号はありませんでした"
+      redirect_to request.referer, alert: "該当する郵便番号はありませんでした"
     else
       @order = Order.new(order_params)
       @order.delivery_postcode = address[:post_code]
@@ -115,5 +124,5 @@ class Public::OrdersController < ApplicationController
   def order_detail_params
     params.permit(:order_id, :product_id, :amount, :price, :creat_status)
   end
-  
+
 end

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container py-5">
   <h6 class="p-1 bg-secondary text-white">注文履歴詳細</h6>
   <div class="row">
     <div class="col-8">
@@ -24,9 +24,9 @@
           <th class="align-middle border border-dark table-active">ステータス</th>
           <td class="align-middle border border-dark"><%= @order.order_status_i18n%></td>
         </tr>
-      </table>  
+      </table>
     </div>
-    
+
     <div class="col-4">
       <table class="table">
         <h6 class="font-weight-bold">請求情報</h6>
@@ -42,9 +42,9 @@
           <th class="align-middle border border-dark table-active">ご請求額</th>
           <td class="align-middle border border-dark text-right"><%= @order.total_price.to_s(:delimited) + "円" %></td>
         </tr>
-      </table>  
+      </table>
     </div>
-    
+
     <div class="col-12">
       <h6 class="font-weight-bold">注文内容</h6>
       <table class="table table-borderless">

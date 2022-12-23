@@ -18,7 +18,7 @@ class Public::CartsController < ApplicationController
       redirect_to carts_path, notice: "商品を追加しました"
     else
       @product = Product.find_by(id: params[:cart][:product_id])
-      redirect_to product_path(@product.id), notice: "購入数を選択してください。"
+      redirect_to product_path(@product.id), alert: "購入数を選択してください。"
     end
   end
 
@@ -52,5 +52,5 @@ class Public::CartsController < ApplicationController
   def cart_params
     params.require(:cart).permit(:customer_id, :product_id, :amount)
   end
-  
+
 end
