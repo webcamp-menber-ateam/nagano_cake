@@ -1,4 +1,4 @@
-<header>
+<header class="sticky-top">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><%= image_tag 'logo_image.png', size: "100x100" %></a>
@@ -31,6 +31,7 @@
             <% end %>
           </li>
         </ul>
+        <div><%= render 'layouts/search' %></div>
       </div>
 
       <!--管理者側ログイン-->
@@ -63,6 +64,7 @@
             <% end %>
           </li>
         </ul>
+        <div><%= render 'layouts/search' %></div>
       </div>
 
       <!--顧客・管理者側ログアウト-->
@@ -90,9 +92,9 @@
             <% end %>
           </li>
         </ul>
+        <div><%= render 'layouts/search' %></div>
       </div>
       <% end %>
-      <div><%= render 'layouts/search' %></div>
     </div>
   </nav>
 </header>
