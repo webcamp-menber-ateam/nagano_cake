@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-5">
   <div class="row px-4">
     <h5 class="ml-4 py-4">新規会員登録</h5>
   </div>
@@ -26,12 +26,12 @@
         <p class="col-4">メールアドレス</p>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com' %>
       </div>
-      
+
       <% if session[:customer].present? %>
         <% @customer.postcode = session[:customer]["postcode"] %>
         <% @customer.address = session[:customer]["address"] %>
       <% end %>
-      
+
       <div class="field row mt-2">
         <p class="col-4">郵便番号(ハイフンなし)</p>
         <%= f.text_field :postcode, autofocus: true, value: @customer.postcode, placeholder: '0000000' %>
@@ -42,11 +42,11 @@
         <p class="col-4">住所</p>
         <%= f.text_field :address, autofocus: true, value: @customer.address, class: 'col-md-5', placeholder: '東京都渋谷区代々木神園町0-0' %>
       </div>
-      
+
       <% if session[:customer].present? %>
         <% session[:customer].clear %>
       <% end %>
-      
+
       <div class="field row mt-2">
         <p class="col-4">電話番号(ハイフンなし)</p>
         <%= f.text_field :phone_number, autofocus: true, placeholder: '00000000000' %>

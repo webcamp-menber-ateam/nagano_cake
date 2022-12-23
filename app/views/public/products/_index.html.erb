@@ -1,7 +1,7 @@
 <div>
   <div class="d-flex flex-wrap">
     <% products.each do |product| %>
-      <div class="mr-3 d-flex flex-column mb-4">
+      <div class="mr-3 d-flex flex-column mb-4 ">
         <%= link_to product_path(product.id) do %>
           <%= image_tag product.get_image(190, 130), class: 'img-fluid mb-1' %>
         <% end %>
