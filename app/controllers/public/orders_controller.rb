@@ -59,7 +59,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    binding.pry
     # トランザクション処理の指定(途中でエラーの場合は全てロールバックされる)
     ActiveRecord::Base.transaction do
       order = Order.new(session[:order])
