@@ -23,6 +23,11 @@
 
 
  /* 商品一覧 */
+ .product_img {
+     max-width: 100%;
+     height: auto;
+ }
+
  .product_name {
    width: 160px;
    overflow-wrap: break-word;
