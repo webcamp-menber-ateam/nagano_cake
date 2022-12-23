@@ -1,3 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
  /* topページ */
  .top_massage {
   /*font-family: "Kaisei Decol", "Hina Mincho";*/
@@ -23,17 +30,12 @@
 
 
 /* ページネーション */
-.pagination {
-  justify-content: center;
-  align-items: center;
-}
+/*.pagination {*/
+/*}*/
 
 .pagination>li {
   vertical-align: baseline;
-  margin: 0 5px;
-  border-radius: 15px;
-  height: 30px;
-  width: 30px;
+  margin: 0 6px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -42,6 +44,7 @@
 .pagination>li>a {
   border: none;
   color: #343a40;
+  margin: 0 7px;
 }
 
 .pagination>.current {
