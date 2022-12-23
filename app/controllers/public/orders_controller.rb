@@ -63,8 +63,8 @@ class Public::OrdersController < ApplicationController
     ActiveRecord::Base.transaction do
       order = Order.new(session[:order])
       order.save
-      
-      if params[:check].present? && params[:check].to_i == 1 
+
+      if params[:check].present? && params[:check].to_i == 1
         new_address = Address.new
         new_address.customer_id = order.customer_id
         new_address.postcode = order.delivery_postcode
