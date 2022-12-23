@@ -1,0 +1,19 @@
+<div class ="container my-4">
+  <div class="row">
+    <div class="col-5 text-center align-self-center">
+      <%= image_tag product.get_image(220, 190) %>
+    </div>
+    <div class="col-7 m-0 pr-3 text-left">
+      <h5 class="font-weight-bold"><%= product.name %></h5>
+      <p class="my-3"><%= product.explanation %></p>
+      <h5 class="mb-3">¥ <%= product.with_tax_price %> <span class="small">(税込)</span></h5>
+      <%= form_with model: cart, url: carts_path, method: :post do |f| %>
+        <%= f.hidden_field :product_id, value: product.id %>
+        <%= f.select :amount, *[1..10], min: 1, include_blank: "個数選択", class: "mt-4" %>
+        <div>
+          <%= f.submit "カートに入れる", class: 'mt-3 btn btn-sm btn-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

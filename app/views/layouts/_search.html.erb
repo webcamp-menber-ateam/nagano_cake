@@ -1,6 +1,6 @@
 <%= form_with url: products_path, local: true, method: :get, class: "d-flex" do |f| %>
   <%= f.text_field :search, placeholder: 'Search', class: "form-control me-2"  %>
   <%= button_tag type: :submit, class: "btn btn-outline-primary" do %>
-    <i class="fas fa-search"></i>
+    <i class="fas fa-search" onclick="stopTimer()"></i>
   <% end %>
 <% end %>

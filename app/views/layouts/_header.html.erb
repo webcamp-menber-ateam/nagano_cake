@@ -1,7 +1,7 @@
 <header class="sticky-top">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><%= image_tag 'logo_image.png', size: "100x100" %></a>
+      <a class="navbar-brand" onclick="stopTimer()" href="/"><%= image_tag 'logo_image.png', size: "100x100" %></a>
       <button class="navbar-toggler  ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,22 +10,22 @@
       <span class="navbar-brand mb-0 h1">ようこそ、<%= current_customer.last_name %>さん!</span>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-          <li class="mr-2">
+          <li class="mr-2" onclick="stopTimer()">
             <%= link_to my_page_customers_path, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
               マイページ
             <% end %>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" onclick="stopTimer()">
             <%= link_to products_path, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
               商品一覧
             <% end %>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" onclick="stopTimer()">
             <%= link_to carts_path, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
               カート
             <% end %>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" onclick="stopTimer()">
             <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
               ログアウト
             <% end %>
