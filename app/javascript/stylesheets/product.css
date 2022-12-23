@@ -6,15 +6,31 @@
 }
 
 .slider-item {
-    width: 100%;/*各スライダー全体の横幅を画面の高さいっぱい（100%）にする*/
+    width: 800px;/*各スライダー全体の横幅を画面の高さいっぱい（100%）にする*/
     height: 400px;/*各スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
     background-repeat: no-repeat;/*背景画像をリピートしない*/
     background-position: center;/*背景画像の位置を中央に*/
     background-size: cover;/*背景画像が.slider-item全体を覆い表示*/
 }
+.slider-item01 {
+  background: url("../../assets/images/top1_image.png");
+  background-size:  cover;
+}
 
-h5{
+.slider-item02 {
+  background-image: url(../../assets/images/top2_image.png);
+  background-size:  cover;
+}
+
+.slider-item03 {
+  background-image: url(../../assets/images/top3_image.png);
+  background-size:  cover;
+}
+
+
+.top_text{
   position: absolute;
+  color: white;
   z-index: 2;
   top: 10%;
   left: 50%;
