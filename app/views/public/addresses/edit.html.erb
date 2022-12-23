@@ -1,14 +1,14 @@
-<div class="container py-5 px-sm-0">
+<div class="container my-5 py-5 px-sm-0">
   <%= render 'layouts/errors', obj: @address %>
   <div class="col-4 mt-3">
     <h4 class="p-1 bg-secondary text-white text-center">配送先編集</h4>
   </div>
-  
+
   <% if session[:address].present? %>
     <% @address.postcode = session[:address]["postcode"] %>
     <% @address.address = session[:address]["address"] %>
   <% end %>
-  
+
   <%= form_with model: @address, method: :patch, local: true do |f| %>
     <div class="form-group row">
       <div class="col-3">

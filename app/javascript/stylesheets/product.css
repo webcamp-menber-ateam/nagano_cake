@@ -1,5 +1,5 @@
 .slider {
-    position:relative;
+  position:relative;
   z-index: 1;
   /*↑z-indexの値をh1のz-indexの値よりも小さくして背景に回す*/
   height: 400px;
@@ -33,12 +33,19 @@
   color: white;
   z-index: 2;
   top: 10%;
-  left: 50%;
-  transform: translate(-50%, 0%);
+  left: 40%;
+  -webkit-transform: translate(-30%, 0%);
+  text-shadow: 2px 2px 5px black;
   text-align: center;
-  /*font-size: 2vw;*/
+  font-size: 20px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.top_text span{
+  font-weight: bold;
+  font-size: 34px;
+  vertical-align: bottom; 
 }
 
 /*以下モーダル処理*/
@@ -68,6 +75,7 @@
   width: 500px;
   /* showビューの幅に合わせて設定 */
   background-color: white;
+  border-radius: 8px;
 }
 
 /* hiddenクラスで最初は表示されないようにする */

@@ -1,6 +1,6 @@
-<div class="container py-5 px-sm-0">
+<div class="container my-5 py-5 px-sm-0">
   <%= render 'layouts/errors', obj: @address %>
-  <div class="col-4 mt-3">
+  <div class="col-4 mt-2">
     <h4 class="p-1 bg-secondary text-white text-center">配送先登録/一覧</h4>
   </div>
 
@@ -8,13 +8,13 @@
     <% @address.postcode = session[:address]["postcode"] %>
     <% @address.address = session[:address]["address"] %>
   <% end %>
-  
+
   <%= form_with model: @address, local: true do |f| %>
     <div class="form-group row">
       <div class="col-3">
         <%= f.label :"郵便番号(ハイフンなし)", class: 'ml-4 mt-4' %>
       </div>
-      
+
       <div class="col-9">
         <%= f.text_field :postcode, :placeholder => "0000000", value: @address.postcode, class: 'col-4 mt-4' %>
         <%= f.submit "検索", formaction: lookup_address_addresses_path, formmethod: :get %>
@@ -29,7 +29,7 @@
         <%= f.text_area :address, :placeholder => "東京都渋谷区代々木神園町0-0", value: @address.address, class: 'col-8 mt-1' %>
       </div>
     </div>
-    
+
     <% if session[:address].present? %>
       <% session[:address].clear %>
     <% end %>
@@ -48,7 +48,7 @@
   <% end %>
 </div>
 
-<div class="table-responsive col-9 ml-5 mt-5">
+<div class="table-responsive col-9 ml-5 my-5">
   <table class="table table-condensed table-bordered">
     <thead class="thead-light">
       <tr>
