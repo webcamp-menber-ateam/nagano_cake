@@ -20,7 +20,20 @@ class Admin::CustomersController < Admin::ApplicationController
 
   def orders
     @customer = Customer.find(params[:customer_id])
-    @orders = Order.where(customer_id: params[:customer_id]).page(params[:page])
+    search = params[:search]
+    if search == "waiting_for_payment"
+      @orders = Order.page(params[:page]).where(customer_id: params[:customer_id]).where(order_status: 0).order(created_at: "DESC")
+    elsif search == "payment_confirmation"
+      @orders = Order.page(params[:page]).where(customer_id: params[:customer_id]).where(order_status: 1).order(created_at: "DESC")
+    elsif search == "now_at_work"
+      @orders = Order.page(params[:page]).where(customer_id: params[:customer_id]).where(order_status: 2).order(created_at: "DESC")
+    elsif search == "shipping_preparation"
+      @orders = Order.page(params[:page]).where(customer_id: params[:customer_id]).where(order_status: 3).order(created_at: "DESC")
+    elsif search == "sent"
+      @orders = Order.page(params[:page]).where(customer_id: params[:customer_id]).where(order_status: 4).order(created_at: "DESC")
+    else
+      @orders = Order.page(params[:page]).where(customer_id: params[:customer_id]).order(created_at: "DESC")
+    end
   end
 
   private

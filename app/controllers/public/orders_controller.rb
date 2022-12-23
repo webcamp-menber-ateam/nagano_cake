@@ -59,13 +59,12 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    binding.pry
     # トランザクション処理の指定(途中でエラーの場合は全てロールバックされる)
     ActiveRecord::Base.transaction do
       order = Order.new(session[:order])
       order.save
-      
-      if params[:check].present? && params[:check].to_i == 1 
+
+      if params[:check].present? && params[:check].to_i == 1
         new_address = Address.new
         new_address.customer_id = order.customer_id
         new_address.postcode = order.delivery_postcode
