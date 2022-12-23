@@ -1,10 +1,18 @@
  /* topページ */
  .top_massage {
   /*font-family: "Kaisei Decol", "Hina Mincho";*/
-  font-weight: bold;
   background-color:rgba(0,0,0,0.0);
   color:#FFF;
   font-size:22px;
+ }
+
+ .top_massage>h2 {
+  /*font-family: "Kaisei Decol", "Hina Mincho";*/
+  font-weight: bold;
+ }
+
+ .top_massage>p {
+  /*font-family: "Kaisei Decol", "Hina Mincho";*/
  }
 
 
@@ -24,6 +32,9 @@
 .pagination>li {
   vertical-align: baseline;
   margin: 0 5px;
+  border-radius: 15px;
+  height: 30px;
+  width: 30px;
   /*background-color: red;*/
 }
 
@@ -34,14 +45,14 @@
 
 .pagination>.current {
  /*background-color: #666666;*/
-  background: #93c9ff;
+  background: rgba(147,201,255,0.4);
   border-radius: 15px;
-  height: 30px;
-  width: 30px;
+  /*height: 30px;*/
+  /*width: 30px;*/
 }
 
 .pagination>li:hover {
   border-radius: 50%;
-  background-color: red;
+  background-color: rgba(147,201,255,0.7);
   border: red;
 }
