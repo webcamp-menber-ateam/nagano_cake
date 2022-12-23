@@ -1,6 +1,6 @@
-の## ながのCAKE
+## ながのCAKE
 
-<p align="center"><img src="https://github.com/webcamp-menber-ateam/nagano_cake/blob/develop/app/assets/images/logo_image.png" width="130" height="130" /></p>
+<p align="center"><img src="https://github.com/webcamp-menber-ateam/nagano_cake/blob/develop/app/assets/images/logo_image.png" alt="nagano_cake" title="nagano_cake_log" width="130" height="130" /></p>
 
 ## 案件概要
 
@@ -41,15 +41,29 @@
   - 登録商品を一覧、検索結果を表示する場合は、検索条件に当てはまる商品のみ一覧表示する
 
   - 商品の詳細情報を確認することができ、登録情報・販売ステータスを変更することができる
-  
+
   - ジャンルの追加・変更を行うことができる
-  
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+- 顧客側・管理者側共通してジャンル検索・商品検索ができる
 
-* Deployment instructions
+## 設計書
 
-* ...
+- [ER図](https://drive.google.com/file/d/1jgz4aO2qnzrF1evnixtuYmVADjVLljv2/view)
 
-*
+- [テーブル定義書](https://drive.google.com/file/d/1IK7nYIFtvjW8_SWjJNalePKWTGFlo_Zr/view)
+
+- [アプリケーション詳細設計書](https://drive.google.com/file/d/1aQcHwLI7RavTQZEQc651dnfjxXth3GVb/view)
+
+## 開発環境
+
+- Ruby 3.1.2
+
+- Rails 6.1.7
+
+- RubyGems 3.3.7
+
+- git version 2.38.1
+
+## 作成者
+
+- **アジのひらきチーム**
