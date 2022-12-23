@@ -1,4 +1,6 @@
 <%= form_with url: products_path, local: true, method: :get do |f| %>
 <%= f.text_field :search, placeholder: 'Search' %>
-<%= f.submit "検索", class: 'btn-sm btn-primary' %>
+<span onclick="stopTimer()">
+ <%= f.submit "検索", class: 'btn-sm btn-primary' %>
+</span>
 <% end %>
