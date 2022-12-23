@@ -1,7 +1,10 @@
-<header>
+<header class="sticky-top">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><%= image_tag 'logo_image.png', size: "100x100" %></a>
+      <button class="navbar-toggler  ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
       <!--顧客側ログイン-->
       <% if customer_signed_in? %>
       <span class="navbar-brand mb-0 h1">ようこそ、<%= current_customer.last_name %>さん!</span>
@@ -28,6 +31,7 @@
             <% end %>
           </li>
         </ul>
+        <div><%= render 'layouts/search' %></div>
       </div>
 
       <!--管理者側ログイン-->
@@ -60,6 +64,7 @@
             <% end %>
           </li>
         </ul>
+        <div><%= render 'layouts/search' %></div>
       </div>
 
       <!--顧客・管理者側ログアウト-->
@@ -71,7 +76,7 @@
               About
             <% end %>
           </li>
-          <li class="mr-2">
+          <li class="nav-item mr-2">
             <%= link_to products_path, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
               商品一覧
             <% end %>
@@ -87,9 +92,9 @@
             <% end %>
           </li>
         </ul>
+        <div><%= render 'layouts/search' %></div>
       </div>
       <% end %>
-      <div><%= render 'layouts/search' %></div>
     </div>
   </nav>
 </header>
