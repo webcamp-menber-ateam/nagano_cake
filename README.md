@@ -10,9 +10,9 @@
 
 - 会員側
 
-  - 会員登録、ログイン・ログアウト、退会ができるようになる
+  - 顧客は会員登録、ログイン・ログアウト、退会ができる
 
-  - ログイン後はログイン時のみ利用できる機能が利用できるようになる
+  - ログイン後はログイン時のみ利用できる機能が利用できる
 
   - 商品を一覧で表示し、商品一覧の商品画像を押下すると商品詳細に遷移することができる
 
@@ -22,7 +22,7 @@
 
   - 会員情報編集から登録している情報の編集、退会手続きをすることができる
 
-  - 配送先の新規登録、登録している配送先を一覧で表示、配送先の修正・削除をすることができる
+  - 配送先の新規登録、登録している配送先を一覧での表示、配送先の修正・削除をすることができる
 
   - 注文経歴から過去の注文履歴を一覧で確認することができ、注文履歴一覧から詳細を確認することができる
 
@@ -34,7 +34,9 @@
 
   - 注文の詳細を確認することができ、注文ステータス、製作ステータスを変更することができる
 
-  - 顧客情報を一覧で表示し、・検索結果を表示する場合は、検索条件に当てはまる顧客のみ一覧表示する
+  - 顧客情報を一覧で表示することができる、
+
+  - 顧客情報の検索結果を表示する場合は、検索条件に当てはまる顧客のみ一覧表示することができる
 
   - 顧客の詳細情報、顧客のステータス（有効/退会）を切り替えることができる
 
@@ -44,7 +46,7 @@
 
   - ジャンルの追加・変更を行うことができる
 
-- 顧客側・管理者側共通してジャンル検索・商品検索ができる
+#### 顧客側・管理者側共通してジャンル検索・商品検索ができる
 
 ## 設計書
 
@@ -54,15 +56,63 @@
 
 - [アプリケーション詳細設計書](https://drive.google.com/file/d/1aQcHwLI7RavTQZEQc651dnfjxXth3GVb/view)
 
+## 環境構築に必要な手順
+
+kaminariのページネーション設定
+
+    $rails g kaminari:config
+
+    $rails g kaminari:views default
+
+ RailsにBootstrapを導入する
+
+    $ yarn install
+
+    $ yarn add jquery bootstrap@4.5 popper.js
+
+ FontAwesomeの導入
+
+    $ yarn add @fortawesome/fontawesome-free@5.15.4
+
+    $ bundle install
+
+ ActiveStorageをインストールする
+
+    $ rails active_storage:install
+
+ migrateする
+
+    $rails db:migrate
+
 ## 開発環境
 
 - Ruby 3.1.2
 
 - Rails 6.1.7
 
-- RubyGems 3.3.7
+## Gem
 
-- git version 2.38.1
+- devise
+
+- enum_help
+
+- bootstrap
+
+- kaminari 1.2.1'
+
+- pry-byebug
+
+- pry-rails
+
+- better_errors
+
+- image_processing 1.2
+
+- FontAwesome（yarn)
+
+- devise-i18n
+
+- devise-i18n-views
 
 ## 作成者
 
