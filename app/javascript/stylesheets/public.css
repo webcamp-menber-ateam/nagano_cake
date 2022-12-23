@@ -28,6 +28,11 @@
    overflow-wrap: break-word;
  }
 
+ .product:hover {
+    background-color: #FDF5E6;
+    border-radius: 3px;
+ }
+
 
 /* ページネーション */
 /*.pagination {*/
