@@ -34,9 +34,22 @@
         <%="〒 " + @order.delivery_postcode + @order.delivery_address%><br>
         <%= @order.delivery_name + "様" %>
       </div>
-      <div>
-        <%= link_to "注文を確定する", orders_path, method: :post, class: "btn btn-success"%>
-      </div>
+      
+      <% if @delivery_destination == 3 %>
+        <%= form_with url: orders_path, method: :post do |f| %>
+          <label>
+            <%= f.check_box :check %>新しいお届け先を配送先に追加する場合はこちらをチェック
+          </label>
+          <div>
+            <%= f.submit "注文を確定する", class: "btn btn-success"%>
+          </div>
+        <% end %>
+        
+      <% else %>
+        <div>
+          <%= link_to "注文を確定する", orders_path, method: :post, class: "btn btn-success"%>
+        </div>
+      <% end %>
     </div>
 
     <div class="col-4">

@@ -32,12 +32,12 @@ class Public::OrdersController < ApplicationController
     session[:order][:payment_method] = params[:order][:payment_method]
 
     # 配送先処理
-    delivery_destination = params[:order][:delivery_select].to_i
-    if delivery_destination == 1
+    @delivery_destination = params[:order][:delivery_select].to_i
+    if @delivery_destination == 1
       session[:order][:delivery_postcode] = current_customer.postcode.freeze
       session[:order][:delivery_address] = current_customer.address.freeze
       session[:order][:delivery_name] = (current_customer.last_name + current_customer.first_name).freeze
-    elsif delivery_destination == 2
+    elsif @delivery_destination == 2
       delivery = Address.find(params[:order][:address_id])
       session[:order][:delivery_postcode] = delivery.postcode.freeze
       session[:order][:delivery_address] = delivery.address.freeze
@@ -47,7 +47,7 @@ class Public::OrdersController < ApplicationController
       session[:order][:delivery_address] = params[:order][:delivery_address].freeze
       session[:order][:delivery_name] = params[:order][:delivery_name].freeze
     end
-    if delivery_destination == 3 && (params[:order][:delivery_postcode].blank? || params[:order][:delivery_address].blank? || params[:order][:delivery_name].blank?)
+    if @delivery_destination == 3 && (params[:order][:delivery_postcode].blank? || params[:order][:delivery_address].blank? || params[:order][:delivery_name].blank?)
       redirect_to request.referer, alert: "お届け先の入力不足項目があります"
     end
     @carts = current_customer.carts
@@ -59,11 +59,20 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    binding.pry
     # トランザクション処理の指定(途中でエラーの場合は全てロールバックされる)
     ActiveRecord::Base.transaction do
       order = Order.new(session[:order])
       order.save
-
+      
+      if params[:check].present? && params[:check].to_i == 1 
+        new_address = Address.new
+        new_address.customer_id = order.customer_id
+        new_address.postcode = order.delivery_postcode
+        new_address.address = order.delivery_address
+        new_address.name = order.delivery_name
+        new_address.save
+      end
       # 商品詳細の作成
       detail_item = current_customer.carts
       detail_item.each do |item|
