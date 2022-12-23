@@ -6,14 +6,12 @@
   font-size:22px;
  }
 
- .top_massage>h2 {
-  /*font-family: "Kaisei Decol", "Hina Mincho";*/
-  font-weight: bold;
- }
+ /*.top_massage>h2 {*/
+ /* font-weight: bold;*/
+ /*}*/
 
- .top_massage>p {
-  /*font-family: "Kaisei Decol", "Hina Mincho";*/
- }
+ /*.top_massage>p {*/
+ /*}*/
 
 
  /* 商品一覧 */
@@ -24,10 +22,10 @@
 
 
 /* ページネーション */
-/*.pagination {*/
-  /*justify-content: center;*/
-  /*text: center;*/
-/*}*/
+.pagination {
+  justify-content: center;
+  text-align: center;
+}
 
 .pagination>li {
   vertical-align: baseline;
