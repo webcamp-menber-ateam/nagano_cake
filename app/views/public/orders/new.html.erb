@@ -31,7 +31,7 @@
         <span>新しいお届け先</span>
         <div class="ml-4 mb-3 col-xs-12">郵便番号(ハイフンなし)<br>
           <%= f.text_field :delivery_postcode, value: @order.delivery_postcode, placeholder: "000000" %>
-          <%= f.submit "検索",formaction: lookup_address_orders_path, formmethod: :get %>
+          <%= f.submit "検索", formaction: lookup_address_orders_path, formmethod: :get %>
         </div>
         <div class="ml-4 mb-3 col-xs-12">住所<br>
         <%= f.text_field :delivery_address, value: @order.delivery_address, size: "40x10", placeholder: "東京都渋谷区代々木神園町0-0" %></div>
