@@ -1,12 +1,19 @@
 <div>
   <div class="d-flex flex-wrap">
     <% products.each do |product| %>
-      <div class="product mr-3 d-flex flex-column mb-4">
+      <div class="product card mr-3 d-flex flex-column mb-4">
         <%= link_to product_path(product.id) do %>
           <%= image_tag product.get_image(180, 120), class: 'm-1 img-fluid mb-1' %>
+          <div class="">
+          </div>
+          <div class="card-img-overlay">
+            <% if product.is_active == false %>
+              <div class="product_status m-1 text-center text-dark">品切れ中</div>
+            <% end %>
+          </div>
+          <p class="product_name ml-1 text-dark"><%= product.name %></p>
+          <span class="ml-1 text-dark">¥<%= product.price %></span>
         <% end %>
-        <p class="product_name ml-1"><%= product.name %></p>
-        <span class="ml-1">¥<%= product.price %></span>
       </div>
     <% end %>
   </div>
