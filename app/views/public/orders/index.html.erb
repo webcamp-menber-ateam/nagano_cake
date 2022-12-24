@@ -1,6 +1,6 @@
-<div class ="container py-5">
+<div class ="container py-5 mx-auto">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 p-0">
       <h6 class="p-1 bg-secondary text-white">注文履歴一覧</h6>
       <table class="table table">
         <thead>
@@ -8,9 +8,9 @@
             <th class="border border-dark">注文日</th>
             <th class="border border-dark">配送先</th>
             <th class="border border-dark">注文商品</th>
-            <th class="border border-dark">支払い金額</th>
-            <th class="border border-dark">ステータス</th>
-            <th class="border border-dark">注文詳細</th>
+            <th class="border border-dark" style= "width: 120px">支払い金額</th>
+            <th class="border border-dark" style= "width: 120px">ステータス</th>
+            <th class="border border-dark" style= "width: 130px">注文詳細</th>
           </tr>
         </thead>
         <% @orders.each do |order| %>
@@ -25,7 +25,7 @@
             <% order_detail_products = OrderDetail.where(order_id: order.id) %>
             <td class="align-middle border border-dark">
               <% order_detail_products.each do |order_detail| %>
-                <%= order_detail.product.name %><br>
+                <span class="small"><%= order_detail.product.name %></span><br>
               <% end %>
             </td>
             <td class="align-middle border border-dark"><%= order.total_price.to_s(:delimited) + "円"%></td>
