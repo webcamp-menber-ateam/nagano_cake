@@ -6,20 +6,20 @@
 
 
  /* topページ */
- .top_massage {
+ /*.top_massage {*/
   /*font-family: "Kaisei Decol", "Hina Mincho";*/
-  background-color:rgba(0,0,0,0.0);
-  color:#FFF;
-  font-size:22px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
- }
+ /* background-color:rgba(0,0,0,0.0);*/
+ /* color:#FFF;*/
+ /* font-size:22px;*/
+ /* flex-direction: column;*/
+ /* justify-content: center;*/
+ /* align-items: center;*/
+ /*}*/
 
- .top_massage>h2 {
-  font-weight: bold;
-  vertical-align: bottom;
- }
+ /*.top_massage>h2 {*/
+ /* font-weight: bold;*/
+ /* vertical-align: bottom;*/
+ /*}*/
 
 
  /* 商品一覧 */
@@ -63,4 +63,116 @@
   border-radius: 50%;
   background-color: rgba(147,201,255,0.7);
   border: red;
+}
+
+/*スライダー処理*/
+.slider {
+  position:relative;
+  z-index: 1;
+  height: 400px;
+}
+
+.slider-item {
+    width: 800px;/*各スライダー全体の横幅を画面の高さいっぱい（100%）にする*/
+    height: 400px;/*各スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+    background-repeat: no-repeat;/*背景画像をリピートしない*/
+    background-position: center;/*背景画像の位置を中央に*/
+    background-size: cover;/*背景画像が.slider-item全体を覆い表示*/
+}
+.slider-item01 {
+  background: url("../../assets/images/top1_image.png");
+  background-size:  cover;
+}
+
+.slider-item02 {
+  background-image: url(../../assets/images/top2_image.png);
+  background-size:  cover;
+}
+
+.slider-item03 {
+  background-image: url(../../assets/images/top3_image.png);
+  background-size:  cover;
+}
+
+
+.top_text{
+  position: absolute;
+  color: white;
+  z-index: 2;
+  top: 10%;
+  left: 40%;
+  -webkit-transform: translate(-30%, 0%);
+  text-shadow: 2px 2px 5px black;
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.top_text span{
+  font-weight: bold;
+  font-size: 34px;
+  vertical-align: bottom;
+}
+
+/*以下モーダル処理*/
+#mask {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#modal {
+  position: fixed;
+  /* スクロールで移動しないようmodalの位置を固定 */
+  top: 20vh;
+  /* 以下3行：モーダルを左右中央揃えに */
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transform: translate(0, 0) scale(1);
+    /* transitionでアニメーションを作成 */
+  transition: 0.2s;
+  /* マスクより上に重なるようにする */
+  z-index: 2;
+    /* showビューの55%で幅を設定 */
+  width: 50vw;
+  background-color: white;
+  border-radius: 8px;
+}
+
+
+@media screen and (max-width:991px) {
+  .p_name{
+    font-size: 20px;
+  }
+  .p_explanation{
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width:400px) {
+  .p_name{
+    font-size: 17px;
+  }
+  .p_explanation{
+    font-size: 13px;
+  }
+}
+
+/* hiddenクラスで最初は表示されないようにする */
+#mask.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#modal.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(0, 0) scale(0.8);
+  /* 大きさ0.8倍から等倍にモーダルが拡大される */
 }
