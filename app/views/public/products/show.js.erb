@@ -1,0 +1,18 @@
+// # モーダルを取得
+var modal = document.getElementById('modal');
+<!--# マスクを取得-->
+var mask = document.getElementById('mask');
+
+<!--// # モーダルの中身をshowビューに置き換え-->
+<!--// # 部分テンプレートのパス-->
+modal.innerHTML = '<%= escape_javascript(render partial: 'show', locals: { cart: @cart, genres: @genres, product: @product}) %>';
+
+<!--// # hiddenクラスを消してモーダルとマスクを表示させる。-->
+modal.classList.remove('hidden');
+mask.classList.remove('hidden');
+
+<!--// # モーダルの外側（マスク）をクリックするとhiddenクラスが書き込まれ、モーダルとマスクが再び非表示となる-->
+mask.addEventListener('click', () => {
+  modal.classList.add('hidden');
+  mask.classList.add('hidden');
+  });

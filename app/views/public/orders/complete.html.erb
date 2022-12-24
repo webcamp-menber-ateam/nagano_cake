@@ -9,7 +9,13 @@
 
 <!--以下JavaScript設定-->
 <script>
-setTimeout(function () {
-	window.location.href = '/';
-}, 5*1000);
+  const action = function() {
+    window.location.href = '/';
+  }
+  const time =  5*1000;
+  let id = setTimeout(action,time);
+  
+ function stopTimer() {
+   clearTimeout(id);
+  }
 </script>

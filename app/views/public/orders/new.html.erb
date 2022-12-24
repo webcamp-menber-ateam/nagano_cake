@@ -30,7 +30,7 @@
         <%= f.radio_button(:delivery_select, 3)%>
         <span>新しいお届け先</span>
         <div class="ml-4 mb-3 col-xs-12">郵便番号(ハイフンなし)<br>
-          <%= f.text_field :delivery_postcode, value: @order.delivery_postcode, placeholder: "000000" %>
+          <%= f.text_field :delivery_postcode, value: @order.delivery_postcode, placeholder: "0000000" %>
           <%= f.submit "検索", formaction: lookup_address_orders_path, formmethod: :get %>
         </div>
         <div class="ml-4 mb-3 col-xs-12">住所<br>

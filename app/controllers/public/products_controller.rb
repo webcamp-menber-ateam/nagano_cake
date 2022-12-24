@@ -20,4 +20,5 @@ class Public::ProductsController < ApplicationController
     @genres = Genre.all
     @product = Product.find(params[:id])
   end
+
 end
