@@ -16,7 +16,7 @@
         <%= f.text_field :last_name_kana, autofocus: true, placeholder: 'レイワ', class: "mr-md-5" %>
         <%= f.text_field :first_name_kana, autofocus: true, placeholder: 'ミチコ' %>
       </div>
-      
+
       <% if session[:customer].present? %>
         <% @customer.postcode = session[:customer]["postcode"] %>
         <% @customer.address = session[:customer]["address"] %>
@@ -25,14 +25,14 @@
       <div class="field row mt-2">
         <p class="col-3">郵便番号</p>
         <%= f.text_field :postcode, autofocus: true, value: @customer.postcode, placeholder: '0000000' %>
-        <%= f.submit "検索",formaction: lookup_address_customers_path, formmethod: :get %>
+        <%= f.submit "検索",formaction: lookup_address_customers_path, formmethod: :get, class: "postcode_btn ml-2" %>
       </div>
 
       <div class="field row mt-2">
         <p class="col-3">住所</p>
-        <%= f.text_field :address, autofocus: true, value: @customer.address, placeholder: '東京都渋谷区代々木神園町0-0' %>
+        <%= f.text_field :address, autofocus: true, value: @customer.address, placeholder: '東京都渋谷区代々木神園町0-0', class: "col-md-5" %>
       </div>
-      
+
       <% if session[:customer].present? %>
         <% session[:customer].clear %>
       <% end %>
@@ -49,7 +49,7 @@
 
       <div class="actions row mt-3">
         <div class="col-3"></div>
-        <%= f.submit "編集内容を保存",class: "btn btn-sm btn-success px-5 mr-md-5" %>
+        <%= f.submit "編集内容を保存",class: "btn btn-sm btn-success mr-md-5" %>
         <div class="col-1"></div>
         <%= link_to "退会する", unsubscribe_customers_path, class: "btn btn-sm btn-danger px-3" %>
       </div>
