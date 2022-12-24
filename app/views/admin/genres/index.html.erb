@@ -6,17 +6,17 @@
         <h4>ジャンル一覧・追加</h4>
       </div>
       <%= form_with model: [:admin, @genre] do |f| %>
-        <%= f.label :"ジャンル名", class: 'mr-5 mt-5'%>
+        <%= f.label :"ジャンル名", class: 'mr-5 my-3'%>
         <%= f.text_field :name, :placeholder => "ジャンル名", class: 'mr-5' %>
         <%= f.submit "新規登録", class: 'btn btn-success' %>
       <% end %>
     </div>
   </div>
 </div>
-<div class="container mb-3 px-5 px-sm-0">
+<div class="container mb-3 mb-5 px-sm-0">
   <div class="row">
     <div class="col-4">
-      <table class="table mt-5">
+      <table class="table">
         <thead>
           <tr class="table-secondary">
             <th class="text-center">ジャンル</th>

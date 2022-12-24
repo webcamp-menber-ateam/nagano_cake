@@ -3,7 +3,7 @@
     <h5 class="ml-4 py-4">新規会員登録</h5>
   </div>
 
-  <div class="col-12">
+  <div class="col-12 registrations">
     <%= form_with model: @customer, url: customer_registration_path do |f| %>
       <%= render "public/shared/error_messages", resource: resource %>
       <div class="field row mt-2">
@@ -35,7 +35,7 @@
       <div class="field row mt-2">
         <p class="col-4">郵便番号(ハイフンなし)</p>
         <%= f.text_field :postcode, autofocus: true, value: @customer.postcode, placeholder: '0000000' %>
-        <%= f.submit "検索",formaction: lookup_address_customers_path, formmethod: :get %>
+        <%= f.submit "検索",formaction: lookup_address_customers_path, formmethod: :get, class: "postcode_btn ml-2" %>
       </div>
 
       <div class="field row mt-2">
