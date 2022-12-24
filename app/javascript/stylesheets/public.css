@@ -29,6 +29,11 @@
     border-radius: 3px;
  }
 
+ .product_status {
+   background-color: rgb(255,255,255,0.6)
+   /*align-self: flex-end;*/
+ }
+
 
 /* ページネーション */
 .pagination>li {
