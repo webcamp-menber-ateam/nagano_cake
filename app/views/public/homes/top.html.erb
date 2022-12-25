@@ -27,7 +27,7 @@
               <%= image_tag product.get_image(180, 120), class: 'm-1 img-fluid'%>
             <% end %><br>
             <p class="product_name ml-1 mb-1"><%= product.name %></p>
-            <span class="ml-1">¥<%=  product.price %></span>
+            <span class="ml-1">¥<%=  product.price.to_s(:delimited) %></span>
           </div>
           <% end %>
         </div>
