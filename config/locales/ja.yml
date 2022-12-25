@@ -15,6 +15,6 @@ ja:
       order_detail:
         creat_status:
           not_start: "着手不可"
-          waiting_for_production:  "制作待ち"
+          waiting_for_production:  "製作待ち"
           now_at_work: "製作中"
-          created:  "制作完了"
+          created:  "製作完了"

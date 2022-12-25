@@ -30,8 +30,14 @@ class Public::CustomersController < ApplicationController
       redirect_to request.referer, alert: "該当する郵便番号はありませんでした"
     else
       session[:customer] = Customer.new(customer_params)
+      session[:customer][:last_name] = params[:customer][:last_name]
+      session[:customer][:first_name] = params[:customer][:first_name]
+      session[:customer][:last_name_kana] = params[:customer][:last_name_kana]
+      session[:customer][:first_name_kana] = params[:customer][:first_name_kana]
       session[:customer][:postcode] = address[:post_code]
       session[:customer][:address] = address[:prefecture] + address[:city] + address[:street]
+      session[:customer][:phone_number] = params[:customer][:phone_number]
+      session[:customer][:email] = params[:customer][:email]
       redirect_to request.referer
     end
   end
