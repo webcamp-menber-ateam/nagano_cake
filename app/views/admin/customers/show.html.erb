@@ -1,0 +1,58 @@
+<div class="container my-5 px-5 px-sm-0">
+  <%= render 'layouts/errors', obj: @customer %>
+  <div class="row">
+    <div class="col">
+      <div class="px-5 py-4">
+        <h4><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h4>
+        <table class="table table-borderless">
+          <tr>
+            <th style= "width: 160px"></th>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">会員ID</td>
+            <td><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">購入者</td>
+            <td><%= @customer.last_name %><%= @customer.first_name %></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">フリガナ</td>
+            <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">郵便番号</td>
+            <td><%= @customer.postcode %></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">住所</td>
+            <td><%= @customer.address %></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">電話番号</td>
+            <td><%= @customer.phone_number%></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">メールアドレス</td>
+            <td><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">会員ステータス</td>
+            <td>
+              <% if @customer.is_customer_deleted == false  %>
+                <p class="text-success font-weight-bold">有効</p>
+              <% elsif %>
+                <p class="text-muted">退会</p>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+        <div class="col-10 offset-1">
+          <%= link_to "編集する", edit_admin_customer_path, class: 'btn btn-success mx-5' %>
+          <%= link_to "ユーザーの注文詳細一覧", admin_customer_orders_path(@customer), class: 'btn btn-secondary mx-5' %>
+          <%= link_to "注文履歴一覧へ戻る", admin_root_path, class: 'btn btn-info mx-5' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container py-5">
+  <div class="row mt-5">
+    <div class="col-md-3">
+      <%= render 'genre', genres: @genres %>
+    </div>
+
+    <div class="col-md-9">
+      <h4 class="ml-1">商品一覧<span class="small"> (全<%= @products_count %>件)</span></h4>
+      <%= render 'index', products: @products %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="container my-5 px-5 px-sm-0">
+  <div class="row">
+    <div class="col">
+      <div class="row px-5 py-4">
+        <h4 class="col-6">商品一覧</h4>
+        <div class="col-6 text-right">
+          <%= link_to new_admin_product_path do %>
+            <img src="/assets/plusIcon.png" alt="">
+          <% end %>
+        </div>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr class="table-secondary">
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td><%= product.id %></td>
+              <td><%= link_to product.name, admin_product_path(product.id) %></td>
+              <td><%= product.price.to_s(:delimited)%></td>
+              <td><%= product.genre.name %></td>
+              <td>
+                <% if product.is_active == true %>
+                  <P class="text-success font-weight-bold">販売中</p>
+                <% else %>
+                  <P class="text-muted">販売停止中</p>
+                <% end %>
+              </td>
+            </td>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center">
+        <%= paginate @products %>
+      </div>
+    </div>
+  </div>
+</div>

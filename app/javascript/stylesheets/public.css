@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+ /*新規会員登録*/
+.postcode_btn {
+  margin: auto auto;
+  height: 30px;
+  width: 50px;
+}
+
+
+ /*商品一覧*/
+ .product_img {
+     max-width: 100%;
+     height: auto;
+ }
+
+ .product_name {
+   width: 160px;
+   overflow-wrap: break-word;
+ }
+
+ .product:hover {
+    background-color: #FDF5E6;
+    border-radius: 3px;
+ }
+
+ .product_status {
+   background-color: rgba(255,255,255,0.6)
+ }
+
+
+/* ページネーション */
+.pagination>li {
+  vertical-align: baseline;
+  margin: 0 6px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination>li>a {
+  border: none;
+  color: #343a40;
+  margin: 0 7px;
+}
+
+.pagination>.current {
+  background: rgba(147,201,255,0.4);
+  border-radius: 15px;
+}
+
+.pagination>li:hover {
+  border-radius: 50%;
+  background-color: rgba(147,201,255,0.7);
+  border: red;
+}
+
+/*スライダー処理*/
+.slider {
+  position:relative;
+  z-index: 1;
+  height: 400px;
+}
+
+.slider-item {
+    width: 800px;/*各スライダー全体の横幅を画面の高さいっぱい（100%）にする*/
+    height: 400px;/*各スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+    background-repeat: no-repeat;/*背景画像をリピートしない*/
+    background-position: center;/*背景画像の位置を中央に*/
+    background-size: cover;/*背景画像が.slider-item全体を覆い表示*/
+}
+.slider-item01 {
+  background: url("../../assets/images/top1_image.png");
+  background-size:  cover;
+}
+
+.slider-item02 {
+  background-image: url(../../assets/images/top2_image.png);
+  background-size:  cover;
+}
+
+.slider-item03 {
+  background-image: url(../../assets/images/top3_image.png);
+  background-size:  cover;
+}
+
+
+.top_text{
+  position: absolute;
+  color: white;
+  z-index: 2;
+  top: 10%;
+  left: 40%;
+  -webkit-transform: translate(-30%, 0%);
+  text-shadow: 2px 2px 5px black;
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.top_text span{
+  font-weight: bold;
+  font-size: 34px;
+  vertical-align: bottom;
+}

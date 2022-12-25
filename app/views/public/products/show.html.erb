@@ -1,0 +1,36 @@
+<div class="container my-5">
+  <div class="row mt-5">
+    <div class="col-md-3">
+      <%= render 'genre', genres: @genres %>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row">
+        <div class="product_img">
+          <%= image_tag @product.get_image(230, 150), class: 'ml-md-3 product_img' %>
+        </div>
+
+        <div class="col-6 ml-md-3">
+          <h5 class="mb-1 font-weight-bold"><%= @product.name %></h5>
+          <p class="my-4"><%= @product.explanation %></p>
+          <div class="row">
+            <h5 class="ml-md-3">¥ <%= @product.with_tax_price.to_s(:delimited) %></h5>
+            <p class="small ml-1 d-flex align-items-end"> (税込)</p>
+          </div>
+
+          <div class="row d-flex justify-content-evenly">
+            <%= form_with model: @cart, url: carts_path, method: :post, class: 'ml-md-3' do |f| %>
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.select :amount, *[1..10], min: 0, include_blank: "個数選択", class: 'mr-md-3' %>
+              <% if @product.is_active == true %>
+                <%= f.submit "カートに入れる", class: 'btn btn-sm btn-success' %>
+              <% else %>
+                <div class="btn btn-sm btn-secondary mx-2 px-3">品切れ中</div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

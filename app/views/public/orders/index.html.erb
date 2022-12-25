@@ -1,0 +1,40 @@
+<div class ="container py-5 mx-auto">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h6 class="p-1 bg-secondary text-white">注文履歴一覧</h6>
+      <table class="table table">
+        <thead>
+          <tr class="table-active">
+            <th class="border border-dark">注文日</th>
+            <th class="border border-dark">配送先</th>
+            <th class="border border-dark">注文商品</th>
+            <th class="border border-dark" style= "width: 120px">支払い金額</th>
+            <th class="border border-dark" style= "width: 120px">ステータス</th>
+            <th class="border border-dark" style= "width: 130px">注文詳細</th>
+          </tr>
+        </thead>
+        <% @orders.each do |order| %>
+        <tbody>
+          <tr>
+            <td class="align-middle border border-dark"><%= order.created_at.strftime('%Y/%m/%d') %></td>
+            <td class="align-middle border border-dark">
+              <%= "〒 " + order.delivery_postcode %><br>
+              <%= order.delivery_address %><br>
+              <%= order.delivery_name %>
+            </td>
+            <% order_detail_products = OrderDetail.where(order_id: order.id) %>
+            <td class="align-middle border border-dark">
+              <% order_detail_products.each do |order_detail| %>
+                <span class="small"><%= order_detail.product.name %></span><br>
+              <% end %>
+            </td>
+            <td class="align-middle border border-dark"><%= order.total_price.to_s(:delimited) + "円"%></td>
+            <td class="align-middle border border-dark"><%= order.order_status_i18n %></td>
+            <td class="align-middle border border-dark"><%= link_to "表示する", order_path(order.id), class: "btn btn-primary"%></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

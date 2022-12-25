@@ -1,0 +1,37 @@
+<div class="container my-5 px-5 px-sm-0">
+  <%= render 'layouts/errors', obj: @genre %>
+  <div class="row">
+    <div class="col-6">
+      <div class="px-5 py-4">
+        <h4>ジャンル一覧・追加</h4>
+      </div>
+      <%= form_with model: [:admin, @genre] do |f| %>
+        <%= f.label :"ジャンル名", class: 'mr-5 my-3'%>
+        <%= f.text_field :name, :placeholder => "ジャンル名", class: 'mr-5' %>
+        <%= f.submit "新規登録", class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container mb-3 mb-5 px-sm-0">
+  <div class="row">
+    <div class="col-4">
+      <table class="table">
+        <thead>
+          <tr class="table-secondary">
+            <th class="text-center">ジャンル</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td class="align-middle"><%= genre.name %></td>
+              <td class="text-right"><%= link_to "編集する", edit_admin_genre_path(genre.id), class:'btn btn-success' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

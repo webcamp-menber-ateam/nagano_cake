@@ -1,0 +1,12 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 mt-4 text-center">
+      <h5 class="mb-5">本当に退会しますか？</h5>
+      <p>退会すると、会員登録情報や</p>
+      <p>これまでの購入履歴が観覧できなくなります。</p>
+      <p>退会する場合は、「退会する」をクリックしてください。</p>
+      <%= link_to "退会しない", my_page_customers_path, class: "btn btn-sm btn-primary px-4 mr-3" %>
+      <%= link_to "退会する", withdrawal_customers_path, method: :patch, class: "btn btn-sm btn-danger px-4" %>
+    </div>
+  </div>
+</div>

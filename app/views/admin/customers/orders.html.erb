@@ -1,0 +1,23 @@
+<div class="container my-5 px-5 px-sm-0">
+  <div class="row">
+    <div class="col">
+      <div class="px-5 py-4">
+        <%= form_with url: admin_customer_orders_path(@customer), method: :get, local: true do |f| %>
+          <div class="row">
+            <h4 class="col-5"><%= @customer.last_name %><%= @customer.first_name %>さんの注文履歴一覧</h4>
+            <div class="col-2 offset-4">
+              <%= f.select :search, Order.order_statuses_i18n.invert, {prompt: "全て"}, class: 'form-control form-control-sm' %>
+            </div>
+            <div class="col-1">
+              <%= f.submit "Sort", class: 'btn btn-info btn-sm' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <%= render 'admin/homes/index', orders: @orders %>
+      <% if @orders.blank? %>
+        <p>該当の注文履歴はありません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>

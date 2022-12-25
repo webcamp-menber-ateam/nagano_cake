@@ -1,0 +1,65 @@
+<div class="container py-5">
+  <div class="row">
+    <h5 class="col-4 text-center">会員情報編集</h5>
+  </div>
+  
+  <% if session[:customer].present? %>
+    <% @customer.last_name = session[:customer]["last_name"] %>
+    <% @customer.first_name = session[:customer]["first_name"] %>
+    <% @customer.last_name_kana= session[:customer]["last_name_kana"] %>
+    <% @customer.first_name_kana = session[:customer]["first_name_kana"] %>
+    <% @customer.postcode = session[:customer]["postcode"] %>
+    <% @customer.address = session[:customer]["address"] %>
+    <% @customer.phone_number = session[:customer]["phone_number"] %>
+    <% @customer.email = session[:customer]["email"] %>
+  <% end %>
+
+  <div class="col-12 mt-4">
+    <%= form_with model: @customer, url: information_customers_path do |f| %>
+      <div class="field row mt-2">
+        <p class="col-3">名前</p>
+        <%= f.text_field :last_name, autofocus: true, value: @customer.last_name, placeholder: '令和', class: "mr-md-5" %>
+        <%= f.text_field :first_name, autofocus: true, value: @customer.first_name, placeholder: '道子' %>
+      </div>
+
+      <div class="field row mt-2">
+        <p class="col-3">フリガナ</p>
+        <%= f.text_field :last_name_kana, autofocus: true, value: @customer.last_name_kana, placeholder: 'レイワ', class: "mr-md-5" %>
+        <%= f.text_field :first_name_kana, autofocus: true, value: @customer.first_name_kana, placeholder: 'ミチコ' %>
+      </div>
+
+      <div class="field row mt-2">
+        <p class="col-3">郵便番号</p>
+        <%= f.text_field :postcode, autofocus: true, value: @customer.postcode, placeholder: '0000000' %>
+        <%= f.submit "検索",formaction: lookup_address_customers_path, formmethod: :get, class: "postcode_btn ml-2" %>
+      </div>
+
+      <div class="field row mt-2">
+        <p class="col-3">住所</p>
+        <%= f.text_field :address, autofocus: true, value: @customer.address, placeholder: '東京都渋谷区代々木神園町0-0', class: "col-md-5" %>
+      </div>
+
+      <div class="field row mt-2">
+        <p class="col-3">電話番号</p>
+        <%= f.text_field :phone_number, autofocus: true, value: @customer.phone_number, placeholder: '00000000000' %>
+      </div>
+
+      <div class="field row mt-2">
+        <p class="col-3">メールアドレス</p>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", value: @customer.email, placeholder: 'sample@example.com' %>
+      </div>
+
+      <div class="actions row mt-3">
+        <div class="col-3"></div>
+        <%= f.submit "編集内容を保存",class: "btn btn-sm btn-success mr-md-5" %>
+        <div class="col-1"></div>
+        <%= link_to "退会する", unsubscribe_customers_path, class: "btn btn-sm btn-danger px-3" %>
+      </div>
+      
+      <% if session[:customer].present? %>
+        <% session[:customer].clear %>
+      <% end %>
+      
+    <% end %>
+  </div>
+</div>

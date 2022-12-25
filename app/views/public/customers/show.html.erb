@@ -1,0 +1,50 @@
+<div class="container my-5 py-4">
+  <div class="row my-4">
+    <h5 class="col-4 text-center">マイページ</h5>
+  </div>
+
+  <div class="row mb-3">
+    <h5 class="col-2">登録情報</h5>
+    <%= link_to "編集する", information_edit_customers_path, class: "btn btn-sm btn-success px-4" %>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <table class="table table-bordered">
+        <tr class="">
+          <th scope="row">氏名</th>
+          <td><%= @customer.last_name + "　" + @customer.first_name %></td>
+        </tr>
+        <tr>
+          <th>カナ</th>
+          <td><%= @customer.last_name_kana + "　" + @customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <th>郵便番号</th>
+          <td><%= @customer.postcode %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td><%= @customer.phone_number %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <h5 class="col-2">配送先</h5>
+    <%= link_to "一覧を見る", addresses_path, class: "btn btn-sm btn-primary px-4" %>
+  </div>
+  <div class="row mt-3">
+    <h5 class="col-2">注文経歴</h5>
+    <%= link_to "一覧を見る", orders_path, class: "btn btn-sm btn-primary px-4" %>
+  </div>
+</div>

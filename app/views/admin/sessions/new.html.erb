@@ -1,0 +1,25 @@
+<div class="container my-5">
+  <div class="row">
+      <h4 class="px-5 py-4">管理者ログイン</h4>
+  </div>
+
+  <div class="row justify-content-center">
+    <%= render "admin/shared/error_messages", resource: resource %>
+    <%= form_with model: @admin, url: session_path(resource_name), class: 'col-10' do |f| %>
+      <div class="field form-inline row">
+        <%= f.label :メールアドレス, class: 'col-4' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control col-6', placeholder: 'sample@example.com' %>
+      </div>
+
+      <div class="field form-inline row mt-3">
+        <%= f.label :パスワード, class: 'col-4' %>
+        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control col-6' %>
+      </div>
+
+      <div class="actions text-center row mt-4">
+        <div class="col-4"></div>
+          <%= f.submit "ログイン", class: 'btn btn-sm btn-primary px-4' %>
+      </div>
+    <% end %>
+  </div>
+</div>
