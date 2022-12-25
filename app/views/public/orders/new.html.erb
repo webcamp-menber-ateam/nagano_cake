@@ -12,7 +12,7 @@
 
       <h6 class="my-2 font-weight-bold">お届け先</h6>
       <label class="mb-3 ml-4">
-        <%= f.radio_button(:delivery_select, 1, checked: "checked")%>
+        <%= f.radio_button(:delivery_select, 1, id: "button1", checked: "checked")%>
         <span>ご自身の住所</span>
         <div class="ml-4"><%= "〒 " + @customer.postcode + " " +  @customer.address %></div> <!--current_user.postcode -->
         <div class="ml-4"><%= "   " + @customer.last_name + @customer.first_name %>様</div>
@@ -27,10 +27,10 @@
       <% end %>
 
       <label class="ml-4">
-        <%= f.radio_button(:delivery_select, 3)%>
+        <%= f.radio_button(:delivery_select, 3, id: "button3")%>
         <span>新しいお届け先</span>
         <div class="ml-4 mb-3 col-xs-12">郵便番号(ハイフンなし)<br>
-          <%= f.text_field :delivery_postcode, value: @order.delivery_postcode, placeholder: "0000000" %>
+          <%= f.text_field :delivery_postcode, value: @order.delivery_postcode, id: "postcode", placeholder: "0000000" %>
           <%= f.submit "検索", formaction: lookup_address_orders_path, formmethod: :get %>
         </div>
         <div class="ml-4 mb-3 col-xs-12">住所<br>
@@ -45,3 +45,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  if (document.getElementById('postcode').value == "" )  {
+  
+  }else{
+    const button1 = document.getElementById("button1");
+    button1.checked = false
+    const button3 = document.getElementById("button3");
+    button3.checked = true 
+  }
+</script>
