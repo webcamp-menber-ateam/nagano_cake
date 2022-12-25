@@ -21,7 +21,7 @@
             <% end %>
           </li>
           <li class="mr-2" onclick="stopTimer()">
-            <%= link_to carts_path, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
+            <%= link_to carts_path, 'data-turbolinks': false, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
               カート
             <% end %>
           </li>

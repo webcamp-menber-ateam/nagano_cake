@@ -19,6 +19,7 @@
           </tr>
         </thead>
         <% @carts.each do |cart| %>
+          <%= form_with model: cart, url: cart_path(cart.id), method: :patch do |f| %>
         <tbody>
           <tr>
             <td class="align-middle border border-dark">
@@ -26,15 +27,14 @@
               <%= cart.product.name %>
             </td>
             <td class="align-middle border border-dark"><%= (cart.product.with_tax_price).to_s(:delimited) %></td>
-            <%= form_with model: cart, url: cart_path(cart.id), method: :patch do |f| %>
             <td class="align-middle border border-dark text-center"><%= f.select :amount, *[1..99], selected: cart.amount, class: "form-control" %>
             <%= f.submit "変更", class: "ml-2 btn btn-success"%></td>
-            <% end %>
             <td class="align-middle border border-dark"><%= (cart.subtoal).to_s(:delimited) %></td>
             <td class="align-middle border border-dark"><%= link_to "削除する", cart_path(cart.id), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class:"btn btn-danger" %></td>
             <% @total_price += cart.subtoal %>
           </tr>
         </tbody>
+          <% end %>
         <% end %>
         <tbody>
           <tr>

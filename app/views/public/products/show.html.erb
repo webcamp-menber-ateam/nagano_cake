@@ -14,7 +14,7 @@
           <h5 class="mb-1 font-weight-bold"><%= @product.name %></h5>
           <p class="my-4"><%= @product.explanation %></p>
           <div class="row">
-            <h5 class="ml-md-3">¥ <%= @product.with_tax_price %></h5>
+            <h5 class="ml-md-3">¥ <%= @product.with_tax_price.to_s(:delimited) %></h5>
             <p class="small ml-1 d-flex align-items-end"> (税込)</p>
           </div>
 

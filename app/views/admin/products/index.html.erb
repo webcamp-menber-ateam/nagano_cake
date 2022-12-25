@@ -25,7 +25,7 @@
             <tr>
               <td><%= product.id %></td>
               <td><%= link_to product.name, admin_product_path(product.id) %></td>
-              <td><%= product.price%></td>
+              <td><%= product.price.to_s(:delimited)%></td>
               <td><%= product.genre.name %></td>
               <td>
                 <% if product.is_active == true %>
